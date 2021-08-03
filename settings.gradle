@@ -1,0 +1,6 @@
+rootProject.name = 'HatIt'
+include 'data'
+include 'visual'
+include 'generation'
+include 'io'
+

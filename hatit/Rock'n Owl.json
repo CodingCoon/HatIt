@@ -1,0 +1,27 @@
+{
+  "id": "c2fd7ace-67ba-4b1f-a7e0-411ddd4f56a6",
+  "name": "Rock\u0027n Owl",
+  "state": "TOURNAMENT",
+  "criteria": [
+    {
+      "id": "85a8a66a-3f06-4968-b7e3-8a36405c22db",
+      "name": "Geschlecht",
+      "type": "TAGGING"
+    },
+    {
+      "id": "cc357b96-22a6-4d0b-9f0f-5b90147de7fa",
+      "name": "Größe",
+      "type": "QUANTITATIVE"
+    },
+    {
+      "id": "93a97d73-a522-40a8-8c18-1b4c73864c4f",
+      "name": "Wurfskill",
+      "type": "QUALITATIVE"
+    },
+    {
+      "id": "c6448336-ba20-48ae-8923-0e83d7618872",
+      "name": "Ausdauer",
+      "type": "QUALITATIVE"
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+plugins {
+    id 'java'
+    id 'org.openjfx.javafxplugin'
+}
+
+group 'com.hatit'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+//    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
+//    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+}
+
+
+javafx {
+    version = "16"
+    modules = [ 'javafx.controls' ]
+}
+
+
+//test {
+//    useJUnitPlatform()
+//}

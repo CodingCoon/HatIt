@@ -1,0 +1,26 @@
+plugins {
+    id 'java'
+    id 'org.openjfx.javafxplugin'
+}
+
+group 'com.hatit'
+version '0.1'
+
+repositories {
+    mavenCentral()
+}
+
+javafx {
+    modules = [ 'javafx.base']
+}
+
+dependencies {
+    implementation 'com.google.code.gson:gson:2.8.7'
+//    compile('com.googlecode.json-simple:json-simple:1.1.1') {
+//        exclude group: 'org.hamcrest', module: 'hamcrest-core' }
+    implementation project(':data')
+}
+//
+//test {
+//    useJUnitPlatform()
+//}

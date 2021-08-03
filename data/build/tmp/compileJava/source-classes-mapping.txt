@@ -1,0 +1,52 @@
+com/hatit/data/criteria/Criteria.java
+ com.hatit.data.criteria.Criteria
+com/hatit/data/generation/Preferences.java
+ com.hatit.data.generation.Preferences
+ com.hatit.data.generation.Preferences$CriteriaUsage
+com/hatit/data/tournament/Tournament.java
+ com.hatit.data.tournament.Tournament
+com/hatit/data/player/Player.java
+ com.hatit.data.player.Player
+com/hatit/data/tournament/TournamentImpl.java
+ com.hatit.data.tournament.TournamentImpl
+module-info.java
+ module-info
+com/hatit/data/player/PlayerImpl.java
+ com.hatit.data.player.PlayerImpl
+com/hatit/data/criteria/InformativeSettingImpl.java
+ com.hatit.data.criteria.InformativeSettingImpl
+com/hatit/data/criteria/CriteriaImpl.java
+ com.hatit.data.criteria.CriteriaImpl
+com/hatit/data/criteria/InformativeSetting.java
+ com.hatit.data.criteria.InformativeSetting
+com/hatit/data/criteria/TaggingSettingImpl.java
+ com.hatit.data.criteria.TaggingSettingImpl
+com/hatit/data/tournament/CreationState.java
+ com.hatit.data.tournament.CreationState
+com/hatit/data/team/Team.java
+ com.hatit.data.team.Team
+com/hatit/data/team/ValuedPlayer.java
+ com.hatit.data.team.ValuedPlayer
+com/hatit/data/generation/PreferencesImpl.java
+ com.hatit.data.generation.PreferencesImpl
+com/hatit/data/criteria/QualitativeSetting.java
+ com.hatit.data.criteria.QualitativeSetting
+ com.hatit.data.criteria.QualitativeSetting$Range
+com/hatit/data/criteria/QuantitativeSetting.java
+ com.hatit.data.criteria.QuantitativeSetting
+com/hatit/data/criteria/QuantitativeSettingImpl.java
+ com.hatit.data.criteria.QuantitativeSettingImpl
+com/hatit/data/criteria/TaggingSetting.java
+ com.hatit.data.criteria.TaggingSetting
+ com.hatit.data.criteria.TaggingSetting$Option
+com/hatit/data/criteria/Setting.java
+ com.hatit.data.criteria.Setting
+com/hatit/data/criteria/CriteriaType.java
+ com.hatit.data.criteria.CriteriaType
+com/hatit/data/criteria/QualitativeSettingImpl.java
+ com.hatit.data.criteria.QualitativeSettingImpl
+com/hatit/data/tournament/Generation.java
+ com.hatit.data.tournament.Generation
+ com.hatit.data.tournament.Generation$Group
+ com.hatit.data.tournament.Generation$TempTeam
+ com.hatit.data.tournament.Generation$ValueRange

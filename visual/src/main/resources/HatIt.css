@@ -1,0 +1,163 @@
+
+.root {
+    BEIGE: #E1DBD5FF;
+    ROSE: #D07077FF;
+    RED: #7A2A2DFF;
+    BLUE: #22323FFF;
+    BLACK: #000C14FF;
+}
+
+/* ==== MAIN VIEW =====================================*/
+#black-view {
+    -fx-background-color: BLACK;
+}
+
+#rose-view {
+    -fx-background-color: ROSE;
+    -fx-padding: 12;
+    -fx-spacing: 8;
+}
+
+#blue-view {
+    -fx-background-color: BLUE;
+    -fx-padding: 12;
+    -fx-spacing: 8;
+}
+
+#beige-view {
+    -fx-background-color: BEIGE;
+    -fx-padding: 12;
+    -fx-alignment: top-right;
+}
+
+
+/* ==== LABELS =====================================*/
+.state-label {
+    -fx-font-size: 16;
+    -fx-font-weight: bold;
+    -fx-text-fill: ROSE;
+}
+
+.done {
+    -fx-text-fill: BEIGE;
+}
+
+.coming {
+    -fx-text-fill: derive(BEIGE, -40%);
+}
+
+.h0 {
+    -fx-text-fill: BLACK;
+    -fx-font-weight: bold;
+    -fx-font-size: 24;
+}
+
+.h1 {
+    -fx-text-fill: BLACK;
+    -fx-font-weight: bold;
+    -fx-font-size: 18;
+}
+
+.h2 {
+    -fx-text-fill: BLUE;
+    -fx-font-size: 14;
+}
+
+.h3 {
+    -fx-text-fill: BLUE;
+    -fx-font-size: 12;
+}
+
+#title-label {
+    -fx-text-fill: BLACK;
+    -fx-font-size: 40;
+    -fx-font-weight: bold;
+}
+
+
+.image-button {
+    -fx-background-color: derive(ROSE, -20%);
+    -fx-background-radius: 0;
+    -fx-padding: 4 5 4 5;
+}
+
+.image-button:hover {
+    -fx-background-color: derive(ROSE, 20%);
+}
+
+.image-button:armed {
+    -fx-background-color: derive(ROSE, 30%);
+}
+
+/* ==== DATA TYPE VIEWS ========================== */
+.tournament-box {
+    -fx-background-color: BEIGE;
+    -fx-border-color: BLACK;
+    -fx-padding: 8;
+}
+
+.tournament-box:hover {
+    -fx-background-color: derive(BEIGE, -20%);
+}
+
+.tournament-box:pressed {
+    -fx-background-color: derive(BEIGE, -35%);
+}
+
+.text-field {
+    -fx-background-color: BLACK, BEIGE;
+    -fx-background-insets: 0, 0 0 2 0;
+    -fx-background-radius: 0, 0;
+    -fx-font-size: 24;
+
+}
+
+#tournament-view {
+    -fx-hgap: 8;
+    -fx-vgap: 8;
+}
+
+#edit-criteria-view {
+    -fx-spacing: 16;
+}
+
+#edit-player-view {
+    -fx-spacing: 16;
+}
+
+/* ========== BOX LIST VIEW ============================== */
+.box-list-view {
+    fx-spacing: 12;
+}
+
+.item-view {
+    -fx-background-color: BEIGE;
+    -fx-border-color: BLACK;
+    -fx-padding: 8;
+}
+
+.item-view:hover {
+    -fx-background-color: derive(BEIGE, -20%);
+}
+
+.item-view:pressed {
+    -fx-background-color: derive(BEIGE, -35%);
+}
+
+.item-view:selected {
+    -fx-background-color: ROSE;
+}
+
+.add-button {
+    -fx-background-color: derive(ROSE, -20%);
+    -fx-background-radius: 0;
+    -fx-padding: 4 5 4 5;
+}
+
+.add-button:hover {
+    -fx-background-color: derive(ROSE, 20%);
+}
+
+.add-button:armed {
+    -fx-background-color: derive(ROSE, 30%);
+}
