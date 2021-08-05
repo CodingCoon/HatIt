@@ -1,6 +1,8 @@
 package com.hatit.data.criteria;
 
+import javafx.beans.property.Property;
 import javafx.beans.property.SimpleListProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
 
 public interface TaggingSetting extends Setting<String> {
@@ -10,8 +12,8 @@ public interface TaggingSetting extends Setting<String> {
     ObservableList<Option> propOptions();
 
     @Override
-    default String getDefaultValue() {
-        return null;
+    default Property<String> getDefaultValue() {
+        return new SimpleStringProperty();
     }
 
     //_______________________________________________ Inner Classes

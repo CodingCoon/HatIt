@@ -6,6 +6,7 @@ import com.hatit.data.generation.Preferences.CriteriaUsage;
 import com.hatit.data.tournament.Tournament;
 import com.hatit.visual.ScenePartChangeListener;
 import com.hatit.visual.StyleUtil;
+import com.hatit.visual.binding.StringToIntBinding;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.beans.binding.IntegerBinding;
@@ -23,19 +24,20 @@ import javafx.scene.layout.VBox;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EditPreferenceView extends VBox {
+public class PreferencesOverview extends VBox {
     //_______________________________________________ Parameters
+    private static final String ID = "preferences-overview";
+
     private final Tournament tournament;
 
     private final TextField teamCountField = new TextField();
-
     private final List<Runnable> toRemoveListeners = new ArrayList<>();
 
     //_______________________________________________ Initialize
-    public EditPreferenceView(Tournament tournament) {
+    public PreferencesOverview(Tournament tournament) {
         this.tournament = tournament;
+        setId(ID);
 
-        setSpacing(24);
         addPreferencesGrid();
         addTeamCount();
 
@@ -56,8 +58,6 @@ public class EditPreferenceView extends VBox {
 
     private void addPreferencesGrid() {
         GridPane preferencesGrid = new GridPane();
-        preferencesGrid.setHgap(12);
-        preferencesGrid.setVgap(12);
         int row = 0;
 
         preferencesGrid.add(StyleUtil.h2("Aktiv"), 0, row);
@@ -131,41 +131,50 @@ public class EditPreferenceView extends VBox {
     }
 
     //_______________________________________________ Inner Classes
-    private static final class StringToIntBinding extends IntegerBinding implements InvalidationListener {
-        private final int defaultValue;
-        private final StringProperty stringSource;
 
-        private StringToIntBinding(int defaultValue, StringProperty stringSource) {
-            this.defaultValue = defaultValue;
-            this.stringSource = stringSource;
-            this.stringSource.addListener(this);
-        }
 
-        @Override
-        public void dispose() {
-            this.stringSource.removeListener(this);
-        }
 
-        @Override
-        public void invalidated(Observable observable) {
-            invalidate();
-        }
+    /*
+    public class GenerateTeamsView extends VBox {
+    //_______________________________________________ Parameters
+    private final Tournament tournament;
 
-        @Override
-        protected int computeValue() {
-            String text = stringSource.get();
-            if (text != null && ! text.isBlank()) {
-                try {
-                    return Integer.parseInt(text);
-                }
-                catch (NumberFormatException e) {
-                    System.err.println("asdasd");
-                    // some parts are not parseable as int, fallthrough to 0
-                }
+    //_______________________________________________ Initialize
+    public GenerateTeamsView(Tournament tournament) {
+        this.tournament = tournament;
+
+        List<Criteria> taggingCriteria = new ArrayList<>();
+        for (Preferences.CriteriaUsage usage : tournament.getPreferences().getUsages()) {
+            if (usage.isActive() && usage.getCriteriaType() == CriteriaType.TAGGING) {
+                taggingCriteria.add(usage.getCriteria());
             }
-            return defaultValue;
         }
+
+        initUI();
     }
 
+    //_______________________________________________ Methods
+    private void initUI() {
+        Label startLabel = new Label("Es werden nun");
+        Label playerLabel = new Label(tournament.propPlayers().size() + " Spieler");
+        Label groupsLabel = new Label("in x Gruppen eingeteilt");
+        Label teamsLabel = new Label("die gleichmäßig auf " + tournament.getPreferences().propTeamCount().get() + " Teams aufgeteilt werden");
+        VBox generationText = new VBox(startLabel, playerLabel, groupsLabel, teamsLabel);
+
+        Button startButton = new Button("Teams generieren");
+        startButton.setOnAction(event -> tournament.generateTeams());
+
+        setSpacing(12);
+        getChildren().addAll(generationText, startButton);
+    }
+
+    //_______________________________________________ Inner Classes
+    //_______________________________________________ End
+}
+
+
+
+
+     */
     //_______________________________________________ End
 }

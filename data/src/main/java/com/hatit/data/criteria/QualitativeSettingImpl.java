@@ -15,8 +15,8 @@ class QualitativeSettingImpl implements QualitativeSetting {
     }
 
     @Override
-    public Integer getDefaultValue() {
-        return range.getValue().getMin();
+    public Range getRange() {
+        return range.get();
     }
 
     //_______________________________________________ Inner Classes

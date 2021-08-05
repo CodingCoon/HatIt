@@ -4,23 +4,22 @@ import com.hatit.data.team.Team;
 import com.hatit.data.team.ValuedPlayer;
 import com.hatit.visual.StyleUtil;
 import javafx.geometry.HPos;
-import javafx.geometry.Insets;
 import javafx.scene.control.Label;
-import javafx.scene.layout.*;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
 
 public class TeamView extends GridPane {
+
     //_______________________________________________ Parameters
+    private static final String STYLE_CLASS = "team-view";
     private final Team team;
 
     //_______________________________________________ Initialize
     public TeamView(Team team) {
+        getStyleClass().add(STYLE_CLASS);
         this.team = team;
 
         initUI();
-        setVgap(8);
-        setHgap(8);
-        setPadding(new Insets(12));
-        setBorder(new Border(new BorderStroke(StyleUtil.ROSE, BorderStrokeStyle.SOLID, new CornerRadii(12), new BorderWidths(1))));
 
         getColumnConstraints().add(new ColumnConstraints());
         getColumnConstraints().add(new ColumnConstraints());
@@ -42,7 +41,6 @@ public class TeamView extends GridPane {
 
             row++;
         }
-
     }
 
     //_______________________________________________ Inner CLasses

@@ -1,16 +1,20 @@
 package com.hatit.data.criteria;
 
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.Property;
+import javafx.beans.property.SimpleIntegerProperty;
 
-public interface QualitativeSetting extends Setting {
+public interface QualitativeSetting extends Setting<Number> {
     //_______________________________________________ Parameters
     //_______________________________________________ Initialize
     //_______________________________________________ Methods
     ObjectProperty<Range> propRange();
 
+    Range getRange();
+
     @Override
-    default Integer getDefaultValue() {
-        return propRange().getValue().getMin();
+    default Property<Number> getDefaultValue() {
+        return new SimpleIntegerProperty(propRange().getValue().getMin());
     }
 
     //_______________________________________________ Inner Classes

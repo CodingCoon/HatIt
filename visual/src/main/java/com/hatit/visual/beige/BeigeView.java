@@ -1,14 +1,13 @@
 package com.hatit.visual.beige;
 
-import com.hatit.data.tournament.TournamentState;
 import com.hatit.data.tournament.Tournament;
+import com.hatit.data.tournament.TournamentState;
 import com.hatit.visual.Enviroment;
 import com.hatit.visual.ResourceUtil;
 import com.hatit.visual.StyleUtil;
 import com.hatit.visual.beige.criteria.EditCriteriaView;
 import com.hatit.visual.beige.player.EditPlayerView;
-import com.hatit.visual.beige.preferences.EditPreferenceView;
-import com.hatit.visual.beige.teams.GenerateTeamsView;
+import com.hatit.visual.beige.preferences.PreferencesOverview;
 import com.hatit.visual.beige.teams.TeamOverview;
 import com.hatit.visual.beige.tournament.EditTournamentView;
 import javafx.beans.InvalidationListener;
@@ -32,11 +31,11 @@ public class BeigeView extends VBox {
 
     private static final Map<TournamentState, Function<Tournament, Node>> UI_CREATION = new HashMap<>();
     static {
-        UI_CREATION.put(TournamentState.TOURNAMENT, EditTournamentView::new);
-        UI_CREATION.put(TournamentState.CRITERIA, EditCriteriaView::new);
-        UI_CREATION.put(TournamentState.PLAYER, EditPlayerView::new);
-        UI_CREATION.put(TournamentState.PREFERENCES, EditPreferenceView::new);
-        UI_CREATION.put(TournamentState.TEAM, TeamOverview::new);
+        UI_CREATION.put(TournamentState.TOURNAMENT  , EditTournamentView::new); // TODO: all to ...Overview
+        UI_CREATION.put(TournamentState.CRITERIA    , EditCriteriaView::new);
+        UI_CREATION.put(TournamentState.PLAYER      , EditPlayerView::new);
+        UI_CREATION.put(TournamentState.PREFERENCES , PreferencesOverview::new);
+        UI_CREATION.put(TournamentState.TEAM        , TeamOverview::new);
     }
 
     private final Enviroment enviroment;
@@ -65,7 +64,7 @@ public class BeigeView extends VBox {
         setVgrow(contentView, Priority.ALWAYS);
     }
 
-    private void selectionChanged(Tournament oldSelection, Tournament newSelection) {
+    private  void selectionChanged(Tournament oldSelection, Tournament newSelection) {
         if (oldSelection != null) {
             contentView.getChildren().clear();
             oldSelection.getState().removeListener(stateChangedListener);

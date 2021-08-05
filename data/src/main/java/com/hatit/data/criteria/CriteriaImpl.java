@@ -38,9 +38,19 @@ class CriteriaImpl implements Criteria {
     }
 
     @Override
+    public CriteriaType getType() {
+        return type.get();
+    }
+
+    @Override
     public <T extends Setting> ReadOnlyObjectProperty<T> propSettings() {
         //noinspection unchecked
         return (ReadOnlyObjectProperty<T>) settings;
+    }
+
+    @Override
+    public Property<?> getDefaultValueProperty() {
+        return settings.get().getDefaultValue();
     }
 
     //_______________________________________________ Inner Classes

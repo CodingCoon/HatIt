@@ -2,12 +2,8 @@ package com.hatit.io.example;
 
 import com.hatit.data.criteria.Criteria;
 import com.hatit.data.criteria.QualitativeSetting;
-import com.hatit.data.criteria.Setting;
 import com.hatit.data.criteria.TaggingSetting;
 import com.hatit.data.player.Player;
-import com.hatit.data.tournament.Tournament;
-import javafx.beans.property.ReadOnlyObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
 
 public class RockNOwl extends ExampleTournament {
 
@@ -35,7 +31,6 @@ public class RockNOwl extends ExampleTournament {
         tournament.nextState();
 
         tournament.getPreferences().propTeamCount().setValue(8);
-        tournament.nextState();
     }
 
     //_______________________________________________ Methods
@@ -46,11 +41,11 @@ public class RockNOwl extends ExampleTournament {
         Player player = super.createPlayer(i);
 
         TaggingSetting sexSetting = (TaggingSetting) sex.propSettings().get();
-        player.propStats().put(sex.getID(), new SimpleObjectProperty<>(sexSetting.propOptions().get(randomInt(2)).getOption()));
+        player.propTaggingStat(sex).setValue(sexSetting.propOptions().get(randomInt(2)).getOption());
 
-        player.propStats().put(size.getID(), new SimpleObjectProperty<>("" + randomInt(120, 221)));
-        player.propStats().put(throwingSkill.getID(), new SimpleObjectProperty<>(randomInt(1, 5)));
-        player.propStats().put(stamina.getID(), new SimpleObjectProperty<>(randomInt(1, 5)));
+        player.propQualitativStat(size).setValue(randomInt(120, 221));
+        player.propQualitativStat(throwingSkill).setValue(randomInt(1, 5));
+        player.propQualitativStat(stamina).setValue(randomInt(1, 5));
 
         return player;
     }
@@ -59,7 +54,7 @@ public class RockNOwl extends ExampleTournament {
         return randomInt(0, maxValue);
     }
 
-    private int randomInt(int minValue, int maxValue) {
+    private Integer randomInt(int minValue, int maxValue) {
         return (int) (Math.random() * (maxValue - minValue)) + minValue;
     }
 

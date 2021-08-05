@@ -13,6 +13,11 @@ class QuantitativeSettingImpl implements QuantitativeSetting {
     public StringProperty propUnit() {
         return unit;
     }
+
+    @Override
+    public String getUnit() {
+        return unit.get();
+    }
     //_______________________________________________ Inner Classes
     //_______________________________________________ End
 }

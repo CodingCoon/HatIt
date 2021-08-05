@@ -8,7 +8,7 @@ import com.hatit.data.generation.Preferences;
 import com.hatit.data.player.Player;
 import com.hatit.data.team.Team;
 import com.hatit.data.team.ValuedPlayer;
-import javafx.beans.value.ObservableObjectValue;
+import javafx.beans.property.Property;
 import javafx.beans.value.ObservableValue;
 
 import java.util.*;
@@ -40,8 +40,7 @@ class Generation {
         splitUpPlayers();
         generateTeams();
         draftPlayers();
-        List<Team> teams = createTeams();
-        return teams;
+        return createTeams();
     }
 
     private List<Team> createTeams() {
@@ -63,14 +62,12 @@ class Generation {
                     valueRanges.put(criteria, new ValueRange(range.getMin(), range.getMax(), criteriaUsage.propFactor().getValue()));
                 }
                 else if (criteriaType == CriteriaType.QUANTITATIVE) {
-
                     double minValue = Double.MAX_VALUE;
                     double maxValue = Double.MIN_VALUE;
 
                     for (Player player : tournament.propPlayers()) {
-                        //noinspection unchecked
-                        ObservableValue<String> statValue = (ObservableValue<String>) player.propStats().get(criteria.getID());
-                        double value = Double.parseDouble(statValue.getValue());
+                        Property<Number> statValue = player.propQualitativStat(criteria);
+                        double value = statValue.getValue().doubleValue();
                         if (value < minValue) {
                             minValue = value;
                         }
@@ -114,7 +111,6 @@ class Generation {
         }
     }
 
-    @SuppressWarnings("unchecked")
     private void determinePlayerValues() {
         for (Player player : tournament.propPlayers()) {
             double playerValue = 0;
@@ -125,12 +121,12 @@ class Generation {
                 double value;
 
                 if (criteriaType == CriteriaType.QUALITATIVE) {
-                    ObservableObjectValue<Integer> observableValue = (ObservableObjectValue<Integer>) player.propStats().get(key.getID());
-                    value = observableValue.get();
+                    Property<Number> valueProperty = player.propQualitativStat(key);
+                    value = valueProperty.getValue().intValue(); // TODO:
                 }
                 else if (criteriaType == CriteriaType.QUANTITATIVE) {
-                    ObservableValue<String> statValue = (ObservableValue<String>) player.propStats().get(key.getID());
-                    value = Double.parseDouble(statValue.getValue());
+                    Property<Number> valueProperty = player.propQualitativStat(key);
+                    value = valueProperty.getValue().doubleValue();
                 }
                 else {
                     throw new IllegalStateException("snh");
@@ -154,8 +150,7 @@ class Generation {
 
             List<String> tagCode = new ArrayList<>();
             for (Criteria tagCriteria : taggingCriteria) {
-                //noinspection unchecked
-                ObservableValue<String> tagProperty = (ObservableValue<String>) player.propStats().get(tagCriteria.getID());
+                ObservableValue<String> tagProperty = player.propTaggingStat(tagCriteria);
                 tagCode.add(tagProperty.getValue());
             }
 

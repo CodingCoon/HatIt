@@ -2,18 +2,24 @@ package com.hatit.visual.common;
 
 import com.hatit.visual.ResourceUtil;
 import com.hatit.visual.ScenePartChangeListener;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.css.PseudoClass;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -50,6 +56,15 @@ public class BoxListView<T> extends VBox {
         initUI();
         selectedItem.addListener((observable, oldValue, newValue) -> updateItemView(oldValue, newValue));
         sceneProperty().addListener(new ScenePartChangeListener(this::activate, this::deactivate));
+
+//        itemBox.setOnMouseDragReleased(new EventHandler<MouseDragEvent>() {
+//            @Override
+//            public void handle(MouseDragEvent event) {
+//                removePreview(itemBox);
+//                int indexOfDraggingNode = itemBox.getChildren().indexOf(event.getGestureSource());
+//                rotateNodes(itemBox, indexOfDraggingNode, itemBox.getChildren().size()-1);
+//            }
+//        });
     }
 
     //_______________________________________________ Methods
@@ -75,7 +90,7 @@ public class BoxListView<T> extends VBox {
     }
 
     private void initUI() {
-        getChildren().addAll(new AddItemButton(newItemSupplier), itemBox);
+        getChildren().addAll(new AddItemButton(newItemSupplier), new ScrollPane(itemBox));
         for (T item : content) {
             addItemView(item);
         }
@@ -104,7 +119,8 @@ public class BoxListView<T> extends VBox {
             }
             else if (c.wasRemoved()) {
                 for (T removed : c.getRemoved()) {
-                    if (selectedItem.get().equals(removed)) {
+                    T currentSelectedItem = selectedItem.get();
+                    if (currentSelectedItem != null && currentSelectedItem.equals(removed)) {
                         selectedItem.set(null);
                     }
                     removeItemView(removed);
@@ -113,16 +129,89 @@ public class BoxListView<T> extends VBox {
         }
     }
 
-    //_______________________________________________ Inner CLasses
-    private final class ItemView extends StackPane {
-        private static final String STYLE_CLASS = "item-view";
 
-        private ItemView(T item, Node content) {
+//    private void addPreview(final VBox root, ItemView itemView) {
+//        ImageView imageView = new ImageView(itemView.snapshot(null, null));
+//        imageView.setManaged(false);
+//        imageView.setMouseTransparent(true);
+//        root.getChildren().add(imageView);
+//        root.setUserData(imageView);
+//        root.setOnMouseDragged(new EventHandler<MouseEvent>() {
+//            @Override
+//            public void handle(MouseEvent event) {
+//                imageView.relocate(event.getX(), event.getY());
+//            }
+//        });
+//    }
+
+//    private void removePreview(final VBox root) {
+//        root.setOnMouseDragged(null);
+//        root.getChildren().remove(root.getUserData());
+//        root.setUserData(null);
+//    }
+//
+//
+//    private void rotateNodes(final VBox root, final int indexOfDraggingNode,
+//                             final int indexOfDropTarget) {
+//        if (indexOfDraggingNode >= 0 && indexOfDropTarget >= 0) {
+//            final Node node = root.getChildren().remove(indexOfDraggingNode);
+//            root.getChildren().add(indexOfDropTarget, node);
+//        }
+//    }
+
+
+    //_______________________________________________ Inner CLasses
+    private final class ItemView extends HBox {
+        private static final String STYLE_CLASS = "item-view";
+        private final Button deleteButton  = new Button("D");
+        private final Button moveButton    = new Button("M");
+
+        private final Timeline showTimeLine = createTimeline(1);
+        private final Timeline hideTimeLine = createTimeline(0);
+
+        private ItemView(T item, Node contentView) {
             setPrefWidth(250);
+            VBox buttons = new VBox(deleteButton, moveButton);
+            buttons.setSpacing(4);
             getStyleClass().add(STYLE_CLASS);
-            getChildren().add(content);
+            getChildren().addAll(contentView, buttons);
+            setHgrow(contentView, Priority.ALWAYS);
+
             setOnMousePressed(event -> selectedItem.setValue(item));
+
+            deleteButton.setOnAction(event -> content.remove(item));
+            deleteButton.opacityProperty().setValue(0);
+            moveButton.opacityProperty().setValue(0);
+            setOnMouseEntered(event -> showTimeLine.playFromStart());
+            setOnMouseExited(event -> hideTimeLine.playFromStart());
+
+//            setOnDragDetected(event -> {
+//                addPreview(itemBox, ItemView.this);
+//                startFullDrag();
+//            });
+//            // next two handlers just an idea how to show the drop target visually:
+//            setOnMouseDragEntered(event -> setStyle("-fx-background-color: #ffffa0;"));
+//            setOnMouseDragExited(event -> setStyle(""));
+//
+//            setOnMouseDragReleased(event -> {
+//                removePreview(itemBox);
+//                setStyle("");
+//                int indexOfDraggingNode = itemBox.getChildren().indexOf(event.getGestureSource());
+//                int indexOfDropTarget = itemBox.getChildren().indexOf(ItemView.this);
+//                rotateNodes(itemBox, indexOfDraggingNode, indexOfDropTarget);
+//                event.consume();
+//            });
         }
+
+        private Timeline createTimeline(double endValue) {
+            KeyValue dkv = new KeyValue(deleteButton.opacityProperty(), endValue);
+            KeyValue mkv = new KeyValue(moveButton.opacityProperty(), endValue);
+
+            KeyFrame keyFrame  = new KeyFrame(Duration.millis(200), dkv, mkv);
+            return new Timeline(keyFrame);
+        }
+
+
     }
 
     private final class AddItemButton extends StackPane {

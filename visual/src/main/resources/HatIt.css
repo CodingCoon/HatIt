@@ -1,15 +1,16 @@
 
 .root {
-    BEIGE: #E1DBD5FF;
+    LIGHT: #E1DBD5FF;
     ROSE: #D07077FF;
     RED: #7A2A2DFF;
     BLUE: #22323FFF;
-    BLACK: #000C14FF;
+    QUEEN_BLUE: #4F7492FF;
+    DARK: #000C14FF;
 }
 
 /* ==== MAIN VIEW =====================================*/
 #black-view {
-    -fx-background-color: BLACK;
+    -fx-background-color: DARK;
 }
 
 #rose-view {
@@ -25,11 +26,10 @@
 }
 
 #beige-view {
-    -fx-background-color: BEIGE;
+    -fx-background-color: LIGHT;
     -fx-padding: 12;
     -fx-alignment: top-right;
 }
-
 
 /* ==== LABELS =====================================*/
 .state-label {
@@ -39,21 +39,21 @@
 }
 
 .done {
-    -fx-text-fill: BEIGE;
+    -fx-text-fill: LIGHT;
 }
 
 .coming {
-    -fx-text-fill: derive(BEIGE, -40%);
+    -fx-text-fill: derive(LIGHT, -40%);
 }
 
 .h0 {
-    -fx-text-fill: BLACK;
+    -fx-text-fill: DARK;
     -fx-font-weight: bold;
     -fx-font-size: 24;
 }
 
 .h1 {
-    -fx-text-fill: BLACK;
+    -fx-text-fill: DARK;
     -fx-font-weight: bold;
     -fx-font-size: 18;
 }
@@ -69,11 +69,10 @@
 }
 
 #title-label {
-    -fx-text-fill: BLACK;
+    -fx-text-fill: DARK;
     -fx-font-size: 40;
     -fx-font-weight: bold;
 }
-
 
 .image-button {
     -fx-background-color: derive(ROSE, -20%);
@@ -91,30 +90,37 @@
 
 /* ==== DATA TYPE VIEWS ========================== */
 .tournament-box {
-    -fx-background-color: BEIGE;
-    -fx-border-color: BLACK;
+    -fx-background-color: LIGHT;
+    -fx-border-color: DARK;
     -fx-padding: 8;
 }
 
 .tournament-box:hover {
-    -fx-background-color: derive(BEIGE, -20%);
+    -fx-background-color: derive(LIGHT, -20%);
 }
 
 .tournament-box:pressed {
-    -fx-background-color: derive(BEIGE, -35%);
+    -fx-background-color: derive(LIGHT, -35%);
 }
 
 .text-field {
-    -fx-background-color: BLACK, BEIGE;
-    -fx-background-insets: 0, 0 0 2 0;
+    -fx-background-color: DARK, LIGHT;
+    -fx-background-insets: 0, 0 0 1 0;
     -fx-background-radius: 0, 0;
-    -fx-font-size: 24;
+    -fx-font-size: 18;
 
 }
 
 #tournament-view {
     -fx-hgap: 8;
     -fx-vgap: 8;
+}
+
+#tournament-view > .text-field{
+    -fx-background-color: DARK, LIGHT;
+    -fx-background-insets: 0, 0 0 2 0;
+    -fx-background-radius: 0, 0;
+    -fx-font-size: 24;
 }
 
 #edit-criteria-view {
@@ -125,23 +131,58 @@
     -fx-spacing: 16;
 }
 
+#team-overview {
+    -fx-hgap: 12;
+    -fx-vgap: 12;
+}
+
+.team-view {
+    -fx-padding: 12;
+    -fx-hgap: 8;
+    -fx-vgap: 8;
+    -fx-border-color: ROSE;
+    -fx-border-radius: 12;
+    -fx-border-stroke: solid;
+    -fx-border-width: 1;
+}
+
+/* ========== Preferences ============================== */
+#preferences-overview {
+    -fx-spacing: 20
+}
+
+#preferences-overview > GridPane{
+    -fx-hgap: 12;
+    -fx-vgap: 12;
+}
+
 /* ========== BOX LIST VIEW ============================== */
 .box-list-view {
     fx-spacing: 12;
 }
 
+.scroll-pane > .viewport {
+    -fx-background-color: null;
+}
+
+.box-list-view > .scroll-pane {
+    -fx-background-color: null;
+    -fx-hbar-policy: never;
+    -fx-fit-to-width: true;     /* todo style bars   no arrows, only a light red bar  */
+}
+
 .item-view {
-    -fx-background-color: BEIGE;
-    -fx-border-color: BLACK;
+    -fx-background-color: LIGHT;
+    -fx-border-color: DARK;
     -fx-padding: 8;
 }
 
 .item-view:hover {
-    -fx-background-color: derive(BEIGE, -20%);
+    -fx-background-color: derive(LIGHT, -20%);
 }
 
 .item-view:pressed {
-    -fx-background-color: derive(BEIGE, -35%);
+    -fx-background-color: derive(LIGHT, -35%);
 }
 
 .item-view:selected {

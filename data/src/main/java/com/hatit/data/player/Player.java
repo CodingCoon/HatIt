@@ -1,10 +1,8 @@
 package com.hatit.data.player;
 
-import javafx.beans.property.MapProperty;
-import javafx.beans.property.ObjectProperty;
+import com.hatit.data.criteria.Criteria;
+import javafx.beans.property.Property;
 import javafx.beans.property.StringProperty;
-import javafx.beans.value.ObservableNumberValue;
-import javafx.collections.ObservableMap;
 
 import java.util.UUID;
 
@@ -22,8 +20,9 @@ public interface Player {
 
     String getName();
 
-    // TODO: ObservableNumberValue
-    ObservableMap<UUID, ObjectProperty<?>> propStats();
+    <T extends Property<Number>> T propQualitativStat(Criteria criteria);
+
+    StringProperty propTaggingStat(Criteria criteria);
 
     //_______________________________________________ Inner Classes
     //_______________________________________________ End
