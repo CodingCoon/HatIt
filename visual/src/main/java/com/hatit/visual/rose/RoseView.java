@@ -41,15 +41,17 @@ public class RoseView extends HBox {
         tournamentLabel.setId("title-label");
 
         StackPane labelPane = new StackPane(tournamentLabel);
-        Button settingsButton = StyleUtil.createImageButton(ResourceUtil.SETTINGS_1, "Öffnet die Einstellungen", event -> openSettingsDialog());
-        Button escapeButton   = StyleUtil.createImageButton(ResourceUtil.POWER_1   , "Beendet die Anwendung", event -> closeApplication());
+//        Button settingsButton = StyleUtil.createImageButton(ResourceUtil.SETTINGS_1, "Öffnet die Einstellungen", event -> openSettingsDialog());
+        Button escapeButton   = StyleUtil.createImageButton(ResourceUtil.POWER_1, "Beendet die Anwendung", event -> closeApplication());
 
-        getChildren().addAll(labelPane, settingsButton, escapeButton);
+        getChildren().addAll(labelPane/*, settingsButton*/, escapeButton);
         setHgrow(labelPane, Priority.ALWAYS);
     }
 
     private void closeApplication() {
-        // TODO:
+//        save(); // TODO:
+        // ask for really?
+        System.exit(0);
     }
 
     private void openSettingsDialog() {

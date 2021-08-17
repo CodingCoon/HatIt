@@ -1,37 +1,30 @@
 package com.hatit.data.criteria;
 
-import javafx.beans.property.Property;
-import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.ObservableList;
 
-public interface TaggingSetting extends Setting<String> {
+public interface TaggingSetting extends Setting {
     //_______________________________________________ Parameters
     //_______________________________________________ Initialize
     //_______________________________________________ Methods
     ObservableList<Option> propOptions();
 
     @Override
-    default Property<String> getDefaultValue() {
+    default StringProperty getDefaultValue() {
         return new SimpleStringProperty();
     }
 
     //_______________________________________________ Inner Classes
     class Option {
         private final String option;
-        private final String imageResource;
 
-        public Option(String option, String imageResource) {
+        public Option(String option) {
             this.option = option;
-            this.imageResource = imageResource;
         }
 
         public String getOption() {
             return option;
-        }
-
-        public String getImageResource() {
-            return imageResource;
         }
     }
 

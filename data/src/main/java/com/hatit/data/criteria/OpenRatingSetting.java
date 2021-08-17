@@ -1,23 +1,23 @@
 package com.hatit.data.criteria;
 
-import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.StringProperty;
 
-class QuantitativeSettingImpl implements QuantitativeSetting {
+public interface OpenRatingSetting extends Setting {
     //_______________________________________________ Parameters
-    private final StringProperty unit = new SimpleStringProperty();
-
     //_______________________________________________ Initialize
     //_______________________________________________ Methods
-    @Override
-    public StringProperty propUnit() {
-        return unit;
-    }
+    void setUnit(String unit);
+
+    String getUnit();
 
     @Override
-    public String getUnit() {
-        return unit.get();
+    default DoubleProperty getDefaultValue() {
+        return new SimpleDoubleProperty(0);
     }
+
+
     //_______________________________________________ Inner Classes
     //_______________________________________________ End
 }

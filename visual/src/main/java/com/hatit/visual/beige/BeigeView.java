@@ -5,11 +5,11 @@ import com.hatit.data.tournament.TournamentState;
 import com.hatit.visual.Enviroment;
 import com.hatit.visual.ResourceUtil;
 import com.hatit.visual.StyleUtil;
-import com.hatit.visual.beige.criteria.EditCriteriaView;
-import com.hatit.visual.beige.player.EditPlayerView;
+import com.hatit.visual.beige.criteria.CriteriaOverview;
+import com.hatit.visual.beige.player.PlayerOverview;
 import com.hatit.visual.beige.preferences.PreferencesOverview;
 import com.hatit.visual.beige.teams.TeamOverview;
-import com.hatit.visual.beige.tournament.EditTournamentView;
+import com.hatit.visual.beige.tournament.TournamentOverview;
 import javafx.beans.InvalidationListener;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.ObjectProperty;
@@ -31,9 +31,9 @@ public class BeigeView extends VBox {
 
     private static final Map<TournamentState, Function<Tournament, Node>> UI_CREATION = new HashMap<>();
     static {
-        UI_CREATION.put(TournamentState.TOURNAMENT  , EditTournamentView::new); // TODO: all to ...Overview
-        UI_CREATION.put(TournamentState.CRITERIA    , EditCriteriaView::new);
-        UI_CREATION.put(TournamentState.PLAYER      , EditPlayerView::new);
+        UI_CREATION.put(TournamentState.TOURNAMENT  , TournamentOverview::new); // TODO: all to ...Overview
+        UI_CREATION.put(TournamentState.CRITERIA    , CriteriaOverview::new);
+        UI_CREATION.put(TournamentState.PLAYER      , PlayerOverview::new);
         UI_CREATION.put(TournamentState.PREFERENCES , PreferencesOverview::new);
         UI_CREATION.put(TournamentState.TEAM        , TeamOverview::new);
     }
@@ -57,7 +57,7 @@ public class BeigeView extends VBox {
 
     //_______________________________________________ Methods
     private void initUI() {
-        Button nextButton = StyleUtil.createImageButton(ResourceUtil.NEXT, "Weiter", e -> enviroment.propCurrentTournament().get().nextState());
+        Button nextButton = StyleUtil.createTextedImageButton(ResourceUtil.NEXT, "Weiter", e -> enviroment.propCurrentTournament().get().nextState());
         nextButton.visibleProperty().bind(new NextButtonVisibility(enviroment.propCurrentTournament()));
 
         getChildren().addAll(contentView, nextButton);

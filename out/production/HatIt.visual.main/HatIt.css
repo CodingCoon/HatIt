@@ -1,6 +1,7 @@
 
 .root {
     LIGHT: #E1DBD5FF;
+    LIGHT_ROSE: #D8A6A6FF;
     ROSE: #D07077FF;
     RED: #7A2A2DFF;
     BLUE: #22323FFF;
@@ -31,7 +32,23 @@
     -fx-alignment: top-right;
 }
 
+/* ==== TEXT FIELDS =====================================*/
+.text-field {
+    -fx-background-color: QUEEN_BLUE, LIGHT;
+    -fx-background-insets: 0, 1;
+    -fx-background-radius: 0, 0;
+    -fx-font-size: 16;
+}
+
+
 /* ==== LABELS =====================================*/
+.control-label {
+    -fx-background-color: QUEEN_BLUE;
+    -fx-text-fill: LIGHT;
+    -fx-font-size: 16;
+    -fx-padding: 5 7 5 7
+}
+
 .state-label {
     -fx-font-size: 16;
     -fx-font-weight: bold;
@@ -46,10 +63,10 @@
     -fx-text-fill: derive(LIGHT, -40%);
 }
 
-.h0 {
+#title-label {
     -fx-text-fill: DARK;
+    -fx-font-size: 40;
     -fx-font-weight: bold;
-    -fx-font-size: 24;
 }
 
 .h1 {
@@ -58,24 +75,106 @@
     -fx-font-size: 18;
 }
 
-.h2 {
-    -fx-text-fill: BLUE;
-    -fx-font-size: 14;
+/* ==== COMBO BOX =====================================*/
+.combo-box {
+    -fx-background-color: QUEEN_BLUE, LIGHT;
+    -fx-background-insets: 0, 1;
+    -fx-background-radius: 0, 0;
+    -fx-font-size: 16;
 }
 
-.h3 {
-    -fx-text-fill: BLUE;
-    -fx-font-size: 12;
+.combo-box > .arrow-button {
+    -fx-background-color: QUEEN_BLUE;
 }
 
-#title-label {
-    -fx-text-fill: DARK;
-    -fx-font-size: 40;
-    -fx-font-weight: bold;
+.combo-box > .arrow-button > .arrow {
+    -fx-background-color: LIGHT;
 }
 
+.list-view {
+    -fx-background-color: BLUE, LIGHT;
+    -fx-background-insets: 4 0 0 0, 5 1 1 1;
+    -fx-padding: 6 2 2 2;
+}
+
+.combo-box-popup > .list-view > .virtual-flow > .clipped-container > .sheet > .list-cell {
+    -fx-background-color: LIGHT;
+}
+
+.combo-box-popup > .list-view > .virtual-flow > .clipped-container > .sheet > .list-cell:filled:hover {
+    -fx-background-color: derive(QUEEN_BLUE, 20%);
+}
+
+.combo-box-popup > .list-view > .virtual-flow > .clipped-container > .sheet > .list-cell:filled:selected {
+    -fx-background-color: QUEEN_BLUE;
+}
+
+
+/* ==== CHECK BOX =====================================*/
+.check-box {
+    -fx-background-color: QUEEN_BLUE;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+    -fx-padding: 1;
+}
+
+.check-box > .box {
+    -fx-background-color: LIGHT;
+    -fx-padding: 11;
+    -fx-background-radius: 0;
+}
+
+.check-box:selected > .box {
+    -fx-background-color: QUEEN_BLUE;
+}
+
+.check-box:selected > .box > .mark {
+    -fx-shape: "M 22.566406 4.730469 L 20.773438 3.511719 C 20.277344 3.175781 19.597656 3.304688 19.265625 3.796875 L 10.476563 16.757813 L 6.4375 12.71875 C 6.015625 12.296875 5.328125 12.296875 4.90625 12.71875 L 3.371094 14.253906 C 2.949219 14.675781 2.949219 15.363281 3.371094 15.789063 L 9.582031 22 C 9.929688 22.347656 10.476563 22.613281 10.96875 22.613281 C 11.460938 22.613281 11.957031 22.304688 12.277344 21.839844 L 22.855469 6.234375 C 23.191406 5.742188 23.0625 5.066406 22.566406 4.730469 Z";
+    -fx-background-color: LIGHT;
+}
+
+
+/* ==== SLIDER =====================================*/
+.slider {
+    -fx-snap-to-ticks: true;
+    -fx-show-tick-labels: true;
+    -fx-major-tick-unit: 1;
+    -fx-minor-tick-count: 1;
+    -fx-block-increment: 1;
+}
+
+/* ==== TOGGLE BUTTON =====================================*/
+.toggle-button {
+    -fx-background-color: QUEEN_BLUE, LIGHT;
+    -fx-background-insets: 0, 1;
+    -fx-background-radius: 0, 0;
+    -fx-font-size: 16;
+}
+
+.toggle-button.following {
+    -fx-background-insets: 0, 0 1 1 1;
+}
+
+.toggle-button:hover {
+    -fx-background-color: QUEEN_BLUE, derive(QUEEN_BLUE, 40%);
+    -fx-background-insets: 0, 1;
+}
+
+.toggle-button.following:hover {
+    -fx-background-color: QUEEN_BLUE, derive(QUEEN_BLUE, 40%);
+    -fx-background-insets: 0, 0 1 1 1;
+}
+
+.toggle-button:selected {
+    -fx-background-color: QUEEN_BLUE;
+    -fx-background-insets: 0;
+    -fx-text-fill: LIGHT;
+}
+
+
+/* ==== IMAGE BUTTON =====================================*/
 .image-button {
-    -fx-background-color: derive(ROSE, -20%);
+    -fx-background-color: null;
     -fx-background-radius: 0;
     -fx-padding: 4 5 4 5;
 }
@@ -85,10 +184,37 @@
 }
 
 .image-button:armed {
-    -fx-background-color: derive(ROSE, 30%);
+    -fx-background-color: derive(ROSE, 40%);
 }
 
-/* ==== DATA TYPE VIEWS ========================== */
+.texted-image-button {
+    -fx-padding: 1;
+    -fx-background-color: ROSE, LIGHT;
+    -fx-background-insets: 0, 1;
+    -fx-background-radius: 0;
+    -fx-text-fill: DARK;
+    -fx-font-size: 18;
+    -fx-label-padding: 0 8 0 0;
+    -fx-graphic-text-gap: 8;
+}
+
+.texted-image-button:hover {
+    -fx-background-color: ROSE, LIGHT_ROSE;
+}
+
+.texted-image-button:armed {
+    -fx-background-color: ROSE;
+}
+
+.texted-image-button > StackPane {
+    -fx-background-color: ROSE;
+    -fx-background-radius: 0;
+    -fx-padding: 4 5 4 5;
+}
+
+
+
+/* ========== Tournament ============================== */
 .tournament-box {
     -fx-background-color: LIGHT;
     -fx-border-color: DARK;
@@ -103,34 +229,39 @@
     -fx-background-color: derive(LIGHT, -35%);
 }
 
-.text-field {
-    -fx-background-color: DARK, LIGHT;
-    -fx-background-insets: 0, 0 0 1 0;
-    -fx-background-radius: 0, 0;
-    -fx-font-size: 18;
-
-}
-
 #tournament-view {
-    -fx-hgap: 8;
     -fx-vgap: 8;
 }
 
-#tournament-view > .text-field{
-    -fx-background-color: DARK, LIGHT;
-    -fx-background-insets: 0, 0 0 2 0;
-    -fx-background-radius: 0, 0;
-    -fx-font-size: 24;
+/* ========== Criteria ============================== */
+#criteria-overview {
+    -fx-spacing: 24;
 }
 
-#edit-criteria-view {
+#criteria-view {
+    -fx-vgap: 8;
+}
+
+/* ========== Player ============================== */
+#player-overview {
     -fx-spacing: 16;
 }
 
-#edit-player-view {
-    -fx-spacing: 16;
+#player-view {
+    -fx-vgap: 8
 }
 
+/* ========== Preferences ============================== */
+#preferences-overview {
+    -fx-spacing: 20
+}
+
+#preferences-overview > GridPane{
+    -fx-hgap: 0;
+    -fx-vgap: 8;
+}
+
+/* ========== Team ============================== */
 #team-overview {
     -fx-hgap: 12;
     -fx-vgap: 12;
@@ -141,20 +272,10 @@
     -fx-hgap: 8;
     -fx-vgap: 8;
     -fx-border-color: ROSE;
-    -fx-border-radius: 12;
     -fx-border-stroke: solid;
-    -fx-border-width: 1;
+    -fx-border-width: 2;
 }
 
-/* ========== Preferences ============================== */
-#preferences-overview {
-    -fx-spacing: 20
-}
-
-#preferences-overview > GridPane{
-    -fx-hgap: 12;
-    -fx-vgap: 12;
-}
 
 /* ========== BOX LIST VIEW ============================== */
 .box-list-view {
@@ -178,11 +299,11 @@
 }
 
 .item-view:hover {
-    -fx-background-color: derive(LIGHT, -20%);
+    -fx-background-color: LIGHT_ROSE;
 }
 
 .item-view:pressed {
-    -fx-background-color: derive(LIGHT, -35%);
+    -fx-background-color: ROSE;
 }
 
 .item-view:selected {
@@ -190,15 +311,16 @@
 }
 
 .add-button {
-    -fx-background-color: derive(ROSE, -20%);
+    -fx-background-color: RED, ROSE;
+    -fx-background-insets: 0, 1;
     -fx-background-radius: 0;
     -fx-padding: 4 5 4 5;
 }
 
 .add-button:hover {
-    -fx-background-color: derive(ROSE, 20%);
+    -fx-background-color: RED, derive(ROSE, 15%);
 }
 
 .add-button:armed {
-    -fx-background-color: derive(ROSE, 30%);
+    -fx-background-color: RED, derive(ROSE, 30%);
 }

@@ -1,52 +1,59 @@
 package com.hatit.visual.beige.criteria;
 
+import com.hatit.data.criteria.ConstrainedRatingSetting;
 import com.hatit.data.criteria.Criteria;
-import com.hatit.data.criteria.QualitativeSetting;
+import com.hatit.visual.StyleUtil;
+import com.hatit.visual.beige.criteria.CriteriaView.TypeViewBuilder;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.GridPane;
 
-public class QualitativeTypeContentView extends VBox {
+class ConstrainedRatingViewBuilder implements TypeViewBuilder {
     //_______________________________________________ Parameters
-    private final QualitativeSetting setting;
+    private final ConstrainedRatingSetting setting;
+
+    private final Label fromLabel = StyleUtil.createLabel("Von:");
+    private final Label toLabel   = StyleUtil.createLabel("Bis:");
 
     private final TextField fromField = new TextField();
     private final TextField toField = new TextField();
 
     //_______________________________________________ Initialize
-    public QualitativeTypeContentView(Criteria criteria) {
-        this.setting = (QualitativeSetting) criteria.propSettings().get();
+    ConstrainedRatingViewBuilder(Criteria criteria) {
+        this.setting = (ConstrainedRatingSetting) criteria.propSettings().get();
 
-        initUI();
-
-        fromField.setText("" + setting.propRange().get().getMin());
+        fromField.setText("" + setting.getRange().getMin());
         fromField.textProperty().addListener((observable, oldValue, newValue) -> updateRange());
-        toField  .setText("" + setting.propRange().get().getMax());
+        toField  .setText("" + setting.getRange().getMax());
         toField.textProperty().addListener((observable, oldValue, newValue) -> updateRange());
     }
 
     //_______________________________________________ Methods
-    private void initUI() {
-        setSpacing(12);
-        getChildren().addAll(
-                new Label("Von:"),
-                fromField,
-                new Label("Bis:"),
-                toField);
+    @Override
+    public void addUI(GridPane pane) {
+        pane.add(fromLabel, 0, 2);
+        pane.add(fromField, 1, 2);
+        pane.add(toLabel  , 0, 3);
+        pane.add(toField  , 1, 3);
+    }
+
+    @Override
+    public void removeUI(GridPane pane) {
+        pane.getChildren().removeAll(fromLabel, fromField, toLabel, toField);
     }
 
     private void updateRange() {
         int from = getRangePart(fromField);
         int to   = getRangePart(toField);
-        QualitativeSetting.Range range = createUsefulRange(from, to);
-        setting.propRange().setValue(range);
+        ConstrainedRatingSetting.Range range = createUsefulRange(from, to);
+        setting.setRange(range);
     }
 
-    private QualitativeSetting.Range createUsefulRange(int from, int to) {
+    private ConstrainedRatingSetting.Range createUsefulRange(int from, int to) {
         if (from < 0) from = 0;
         if (to < 0) to = 0;
         if (to <= from) to = from + 1;
-        return new QualitativeSetting.Range(from, to);
+        return new ConstrainedRatingSetting.Range(from, to);
     }
 
     private int getRangePart(TextField field) {

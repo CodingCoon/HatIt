@@ -3,11 +3,10 @@ package com.hatit.visual.beige.teams;
 import com.hatit.data.team.Team;
 import com.hatit.data.tournament.Tournament;
 import com.hatit.visual.ScenePartChangeListener;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.TilePane;
 
-import java.util.List;
-
-public class TeamOverview extends TilePane {
+public class TeamOverview extends GridPane {
     //_______________________________________________ Parameters
     private static final String ID = "team-overview";
     private final Tournament tournament;
@@ -22,9 +21,19 @@ public class TeamOverview extends TilePane {
 
     //_______________________________________________ Methods
     private void initUI() {
+        getChildren().clear();
+        int row = 0;
+        int column = 0;
+
         for (Team team : tournament.getTeams()) {
+            if (column == 5) {
+                row++;
+                column = 0;
+            }
+
             TeamView teamView = new TeamView(team);
-            getChildren().add(teamView);
+            add(teamView, column, row);
+            column++;
         }
     }
 

@@ -11,7 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 
-public class EditTournamentView extends GridPane {
+public class TournamentOverview extends GridPane {
     //_______________________________________________ Parameters
     private static final String ID = "tournament-view";
 
@@ -20,7 +20,7 @@ public class EditTournamentView extends GridPane {
     private final TextField nameField = new TextField();
 
     //_______________________________________________ Initialize
-    public EditTournamentView(Tournament tournament) {
+    public TournamentOverview(Tournament tournament) {
         setId(ID);
         this.tournament = tournament;
         sceneProperty().addListener(new ScenePartChangeListener(this::onShow, this::onHide));
@@ -30,8 +30,7 @@ public class EditTournamentView extends GridPane {
 
     //_______________________________________________ Methods
     private void initUI() {
-        Label nameFieldLabel = new Label("Name:");
-        nameField.promptTextProperty().setValue("Bitte geben Sie einen Turniernamen ein!");
+        Label nameFieldLabel = StyleUtil.createLabel("Turniername:");
 
         add(nameFieldLabel, 0, 0);
         add(nameField, 1, 0);

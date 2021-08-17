@@ -20,9 +20,15 @@ public interface Criteria {
 
     StringProperty propName();
 
+    default String getName() {
+        return propName().get();
+    }
+
     ObjectProperty<CriteriaType> propType();
 
-    CriteriaType getType();
+    default CriteriaType getType() {
+        return propType().get();
+    }
 
     <T extends Setting> ReadOnlyObjectProperty<T> propSettings();
 

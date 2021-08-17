@@ -1,8 +1,8 @@
 package com.hatit.data.tournament;
 
+import com.hatit.data.criteria.ConstrainedRatingSetting;
 import com.hatit.data.criteria.Criteria;
 import com.hatit.data.criteria.CriteriaType;
-import com.hatit.data.criteria.QualitativeSetting;
 import com.hatit.data.criteria.TaggingSetting;
 import com.hatit.data.generation.Preferences;
 import com.hatit.data.player.Player;
@@ -22,9 +22,7 @@ class Generation {
     private final Map<Criteria, ValueRange> valueRanges = new HashMap<>();
 
     private final List<ValuedPlayer> playerValues = new ArrayList<>();
-
     private final List<Group> groups = new ArrayList<>();
-
     private final List<TempTeam> teams = new ArrayList<>();
 
     //_______________________________________________ Initialize
@@ -44,7 +42,11 @@ class Generation {
     }
 
     private List<Team> createTeams() {
-        return teams.stream().map(tempTeam -> new Team(tempTeam.name, tempTeam.playerList)).collect(Collectors.toList());
+        Comparator<TempTeam> teamNameComparator = Comparator.comparing(o -> o.name);
+        return teams.stream()
+                .sorted(teamNameComparator)
+                .map(tempTeam -> new Team(tempTeam.name, tempTeam.playerList))
+                .collect(Collectors.toList());
     }
 
     private void setupValueRanges() {
@@ -56,12 +58,12 @@ class Generation {
                 if (criteriaType == CriteriaType.TAGGING) {
                     taggingCriteria.add(criteria);
                 }
-                else if (criteriaType == CriteriaType.QUALITATIVE) {
-                    QualitativeSetting setting = (QualitativeSetting) criteria.propSettings().get();
-                    QualitativeSetting.Range range = setting.propRange().get();
+                else if (criteriaType == CriteriaType.CONSTRAINED_RATING) {
+                    ConstrainedRatingSetting setting = (ConstrainedRatingSetting) criteria.propSettings().get();
+                    ConstrainedRatingSetting.Range range = setting.getRange();
                     valueRanges.put(criteria, new ValueRange(range.getMin(), range.getMax(), criteriaUsage.propFactor().getValue()));
                 }
-                else if (criteriaType == CriteriaType.QUANTITATIVE) {
+                else if (criteriaType == CriteriaType.OPEN_RATING) {
                     double minValue = Double.MAX_VALUE;
                     double maxValue = Double.MIN_VALUE;
 
@@ -120,11 +122,11 @@ class Generation {
                 CriteriaType criteriaType = key.propType().get();
                 double value;
 
-                if (criteriaType == CriteriaType.QUALITATIVE) {
+                if (criteriaType == CriteriaType.CONSTRAINED_RATING) {
                     Property<Number> valueProperty = player.propQualitativStat(key);
                     value = valueProperty.getValue().intValue(); // TODO:
                 }
-                else if (criteriaType == CriteriaType.QUANTITATIVE) {
+                else if (criteriaType == CriteriaType.OPEN_RATING) {
                     Property<Number> valueProperty = player.propQualitativStat(key);
                     value = valueProperty.getValue().doubleValue();
                 }
@@ -159,8 +161,8 @@ class Generation {
     }
 
     private void generateTeams() {
-        for (int i = 0; i < tournament.getPreferences().propTeamCount().get(); i++) {
-            teams.add(new TempTeam("T" + i));
+        for (int i = 1; i <= tournament.getPreferences().propTeamCount().get(); i++) {
+            teams.add(new TempTeam("Team " + i));
         }
     }
 
@@ -177,7 +179,6 @@ class Generation {
                 Collections.sort(teams);
 
                 splitUpPlayers(group, teamCount);
-                printRound(round);
                 round++;
 
             }
@@ -192,7 +193,6 @@ class Generation {
 
             int playerValueSize = group.playerValueList.size();
             splitUpPlayers(group, playerValueSize);
-            printRound(round);
             round++;
         }
     }
@@ -202,11 +202,6 @@ class Generation {
             ValuedPlayer remove = group.playerValueList.remove(0);
             teams.get(i).addPlayer(remove);
         }
-    }
-
-    private void printRound(int round) {
-        System.out.println("--- Runde: " + round);
-        teams.forEach(System.out::println);
     }
 
     //_______________________________________________ Inner Classes

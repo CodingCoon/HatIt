@@ -13,10 +13,7 @@ import javafx.beans.binding.IntegerBinding;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.scene.Node;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.Separator;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -38,8 +35,10 @@ public class PreferencesOverview extends VBox {
         this.tournament = tournament;
         setId(ID);
 
-        addPreferencesGrid();
         addTeamCount();
+        getChildren().add(new Separator());
+        addPreferencesGrid();
+        getChildren().add(new Separator());
 
         sceneProperty().addListener(new ScenePartChangeListener(this::onShow, this::onHide));
     }
@@ -60,16 +59,6 @@ public class PreferencesOverview extends VBox {
         GridPane preferencesGrid = new GridPane();
         int row = 0;
 
-        preferencesGrid.add(StyleUtil.h2("Aktiv"), 0, row);
-        preferencesGrid.add(StyleUtil.h2("Kriterium"), 1, row);
-//        preferencesGrid.add(StyleUtil.h2("Range"), 2, row);
-        preferencesGrid.add(StyleUtil.h2("Faktor"), 2, row);
-        row++;
-
-        Separator separator = new Separator();
-        preferencesGrid.add(separator, 0, row, 3 ,1);
-        row++;
-
         Preferences preferences = tournament.getPreferences();
         for (CriteriaUsage usage : preferences.getUsages()) {
             addUsageRow(preferencesGrid, row, usage);
@@ -80,23 +69,29 @@ public class PreferencesOverview extends VBox {
 
     private void addUsageRow(GridPane preferencesGrid, int row, CriteriaUsage usage) {
         CheckBox activeCheckBox = createActiveCheckBox(usage);
-        Label nameLabel = new Label(usage.getCriteriaName());
+        Label nameLabel = StyleUtil.createLabel(usage.getCriteriaName());
         Node factorField = createFactorField(usage);
 
         activeCheckBox.selectedProperty().addListener((observable, oldValue, newValue) -> {
             nameLabel.setDisable(! newValue);
             factorField.setDisable(! newValue);
+            if (factorField instanceof ComboBox) { // TODO:
+                factorField.setDisable(true);
+            }
         });
 
         preferencesGrid.add(activeCheckBox, 0, row);
         preferencesGrid.add(nameLabel, 1, row);
-//            preferencesGrid.add(new Label(calcRange(usage)), 2, row);
         preferencesGrid.add(factorField, 2, row);
     }
 
     private Node createFactorField(CriteriaUsage usage) {
         if (usage.getCriteriaType() == CriteriaType.TAGGING) {
-            return new Label("Aufteilend");
+            ComboBox<String> comboBox = new ComboBox<>();
+            comboBox.setValue("Aufteilend");
+            comboBox.setDisable(true);
+            comboBox.setMaxWidth(Double.MAX_VALUE);
+            return comboBox;
         }
         else {
             TextField factorField = new TextField("" + usage.propFactor().get());
@@ -116,8 +111,7 @@ public class PreferencesOverview extends VBox {
     }
 
     private void addTeamCount() {
-        HBox content = new HBox(new Label("Teamanzahl: "), teamCountField);
-        content.setSpacing(8);
+        HBox content = new HBox(StyleUtil.createLabel("Teamanzahl: "), teamCountField);
         getChildren().add(content);
     }
 

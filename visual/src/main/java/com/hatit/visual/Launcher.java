@@ -20,7 +20,7 @@ public class Launcher extends Application {
         enviroment.propCurrentTournament().set(null);
 
         HatItView root = new HatItView(enviroment);
-        Scene scene = new Scene(root, 1200, 800);
+        Scene scene = new Scene(root, 1000, 1000);
         scene.getStylesheets().add("HatIt.css");
 
         primaryStage.setScene(scene);

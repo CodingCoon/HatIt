@@ -1,22 +1,19 @@
 package com.hatit.data.criteria;
 
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
-
-class QualitativeSettingImpl implements QualitativeSetting {
+class ConstrainedRatingSettingImpl implements ConstrainedRatingSetting {
     //_______________________________________________ Parameters
-    private final ObjectProperty<Range> range = new SimpleObjectProperty<>(new Range(1, 5));
+    private Range range = new Range(1, 5);
 
     //_______________________________________________ Initialize
     //_______________________________________________ Methods
     @Override
-    public ObjectProperty<Range> propRange() {
-        return range;
+    public void setRange(Range range) {
+        this.range = range;
     }
 
     @Override
     public Range getRange() {
-        return range.get();
+        return range;
     }
 
     //_______________________________________________ Inner Classes

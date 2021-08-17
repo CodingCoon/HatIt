@@ -20,12 +20,6 @@ public class TeamView extends GridPane {
         this.team = team;
 
         initUI();
-
-        getColumnConstraints().add(new ColumnConstraints());
-        getColumnConstraints().add(new ColumnConstraints());
-        ColumnConstraints cc = new ColumnConstraints();
-        cc.setHalignment(HPos.RIGHT);
-        getColumnConstraints().add(cc);
     }
 
     //_______________________________________________ Methods
@@ -41,6 +35,12 @@ public class TeamView extends GridPane {
 
             row++;
         }
+
+        getColumnConstraints().add(new ColumnConstraints());
+        getColumnConstraints().add(new ColumnConstraints());
+        ColumnConstraints cc = new ColumnConstraints();
+        cc.setHalignment(HPos.RIGHT);
+        getColumnConstraints().add(cc);
     }
 
     //_______________________________________________ Inner CLasses

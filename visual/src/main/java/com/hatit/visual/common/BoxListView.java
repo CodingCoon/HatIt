@@ -14,6 +14,7 @@ import javafx.css.PseudoClass;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -32,6 +33,7 @@ public class BoxListView<T> extends VBox {
     private static final String STYLE_CLASS = "box-list-view";
 
     private final ObservableList<T> content;
+    private final Image addImage;
     private final Supplier<T> newItemSupplier;
     private final Function<T, Node> itemViewCreator;
 
@@ -42,9 +44,10 @@ public class BoxListView<T> extends VBox {
     private final ObjectProperty<T> selectedItem = new SimpleObjectProperty<>();
 
     //_______________________________________________ Initialize
-    public BoxListView(ObservableList<T> content, Supplier<T> newItemSupplier, Function<T, Node> itemViewCreator) {
+    public BoxListView(ObservableList<T> content, Image addImage, Supplier<T> newItemSupplier, Function<T, Node> itemViewCreator) {
         getStyleClass().add(STYLE_CLASS);
         itemBox.getStyleClass().add(STYLE_CLASS);
+        this.addImage = addImage;
 
         setSpacing(12);
         itemBox.setSpacing(12); // TODO: funktioniert warum auch immer nicht ohne die zwei Zeilen, Css sollte das abbilden
@@ -164,14 +167,14 @@ public class BoxListView<T> extends VBox {
     private final class ItemView extends HBox {
         private static final String STYLE_CLASS = "item-view";
         private final Button deleteButton  = new Button("D");
-        private final Button moveButton    = new Button("M");
+        // private final Button moveButton    = new Button("M");
 
         private final Timeline showTimeLine = createTimeline(1);
         private final Timeline hideTimeLine = createTimeline(0);
 
         private ItemView(T item, Node contentView) {
             setPrefWidth(250);
-            VBox buttons = new VBox(deleteButton, moveButton);
+            VBox buttons = new VBox(deleteButton/*, moveButton*/);
             buttons.setSpacing(4);
             getStyleClass().add(STYLE_CLASS);
             getChildren().addAll(contentView, buttons);
@@ -181,7 +184,7 @@ public class BoxListView<T> extends VBox {
 
             deleteButton.setOnAction(event -> content.remove(item));
             deleteButton.opacityProperty().setValue(0);
-            moveButton.opacityProperty().setValue(0);
+//            moveButton.opacityProperty().setValue(0);
             setOnMouseEntered(event -> showTimeLine.playFromStart());
             setOnMouseExited(event -> hideTimeLine.playFromStart());
 
@@ -205,21 +208,21 @@ public class BoxListView<T> extends VBox {
 
         private Timeline createTimeline(double endValue) {
             KeyValue dkv = new KeyValue(deleteButton.opacityProperty(), endValue);
-            KeyValue mkv = new KeyValue(moveButton.opacityProperty(), endValue);
+//            KeyValue mkv = new KeyValue(moveButton.opacityProperty(), endValue);
 
-            KeyFrame keyFrame  = new KeyFrame(Duration.millis(200), dkv, mkv);
+            KeyFrame keyFrame  = new KeyFrame(Duration.millis(200), dkv/*, mkv*/);
             return new Timeline(keyFrame);
         }
-
-
     }
 
     private final class AddItemButton extends StackPane {
         private static final String STYLE_CLASS = "add-button";
+        private static final double MIN_WIDTH = 250d;
 
         private AddItemButton(Supplier<T> newItemSupplier) {
             getStyleClass().add(STYLE_CLASS);
-            getChildren().add(new ImageView(ResourceUtil.ADD_ITEM));
+            setPrefWidth(MIN_WIDTH);
+            getChildren().add(new ImageView(addImage));
             setOnMouseClicked(event -> content.add(newItemSupplier.get()));
         }
     }

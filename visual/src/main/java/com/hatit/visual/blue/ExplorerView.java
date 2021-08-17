@@ -34,7 +34,7 @@ public class ExplorerView extends VBox {
     //_______________________________________________ Inner Classes
     private static final class ImageButton extends StackPane {
         private ImageButton(Enviroment enviroment) {
-            getStyleClass().add("image-button");
+            getStyleClass().add("add-button");
             getChildren().add(new ImageView(ResourceUtil.ADD_ITEM));
             setOnMouseClicked(event -> enviroment.addTournament(Tournament.of()));
         }
@@ -43,7 +43,7 @@ public class ExplorerView extends VBox {
     private static final class TournamentBox extends VBox {
 
         private TournamentBox(Enviroment enviroment, Tournament tournament) {
-            getStyleClass().add("tournament-box");
+            getStyleClass().add("item-view");
             Label nameLabel = StyleUtil.h1(tournament.propName().get());
             Label criteriaLabel = StyleUtil.h3(tournament.propCriteria().size() + " Kriterien");
             Label playerLabel = StyleUtil.h3(tournament.propPlayers().size() + " Spieler");

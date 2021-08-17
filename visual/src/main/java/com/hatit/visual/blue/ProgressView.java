@@ -33,10 +33,10 @@ public class ProgressView extends VBox {
 
     //_______________________________________________ Methods
     private void initUI(VBox progressView) {
-        Button backButton = StyleUtil.createImageButton(ResourceUtil.PREVIOUS, "Zurück", event -> goBack());
-        Button saveButton = StyleUtil.createImageButton(ResourceUtil.SAVE, "Speichern", event -> IOService.createService().store(tournament));
+        Button backButton = StyleUtil.createTextedImageButton(ResourceUtil.PREVIOUS, "Zurück", event -> goBack());
+//        Button saveButton = StyleUtil.createImageButton(ResourceUtil.SAVE, "Speichern", event -> IOService.createService().store(tournament));
 
-        HBox buttons = new HBox(backButton, saveButton);    // TODO: pixel perfect
+        HBox buttons = new HBox(backButton/*, saveButton*/);    // TODO: pixel perfect
         buttons.setFillHeight(true);
         buttons.setSpacing(4);
 

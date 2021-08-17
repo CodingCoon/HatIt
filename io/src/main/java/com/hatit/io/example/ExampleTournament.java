@@ -47,7 +47,7 @@ class ExampleTournament {
         criteria.propType().set(CriteriaType.TAGGING);
         TaggingSetting setting = (TaggingSetting) criteria.propSettings().get();
         for (String option : options) {
-            setting.propOptions().add(new TaggingSetting.Option(option, ""));
+            setting.propOptions().add(new TaggingSetting.Option(option));
         }
         return criteria;
     }
@@ -55,18 +55,18 @@ class ExampleTournament {
     Criteria createQuantitative(String name, String unit) {
         Criteria criteria = Criteria.of();
         criteria.propName().set(name);
-        criteria.propType().set(CriteriaType.QUANTITATIVE);
-        QuantitativeSetting setting = (QuantitativeSetting) criteria.propSettings().get();
-        setting.propUnit().setValue(unit);
+        criteria.propType().set(CriteriaType.OPEN_RATING);
+        OpenRatingSetting setting = (OpenRatingSetting) criteria.propSettings().get();
+        setting.setUnit(unit);
         return criteria;
     }
 
-    Criteria createQualitative(String name, QualitativeSetting.Range range) {
+    Criteria createQualitative(String name, ConstrainedRatingSetting.Range range) {
         Criteria criteria = Criteria.of();
         criteria.propName().set(name);
-        criteria.propType().set(CriteriaType.QUALITATIVE);
-        QualitativeSetting setting = (QualitativeSetting) criteria.propSettings().get();
-        setting.propRange().setValue(range);
+        criteria.propType().set(CriteriaType.CONSTRAINED_RATING);
+        ConstrainedRatingSetting setting = (ConstrainedRatingSetting) criteria.propSettings().get();
+        setting.setRange(range);
         return criteria;
     }
     //_______________________________________________ Inner Classes

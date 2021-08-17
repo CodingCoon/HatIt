@@ -1,20 +1,19 @@
 package com.hatit.data.criteria;
 
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.Property;
+import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
-public interface QualitativeSetting extends Setting<Number> {
+public interface ConstrainedRatingSetting extends Setting {
     //_______________________________________________ Parameters
     //_______________________________________________ Initialize
     //_______________________________________________ Methods
-    ObjectProperty<Range> propRange();
+    void setRange(Range range);
 
     Range getRange();
 
     @Override
-    default Property<Number> getDefaultValue() {
-        return new SimpleIntegerProperty(propRange().getValue().getMin());
+    default IntegerProperty getDefaultValue() {
+        return new SimpleIntegerProperty(getRange().getMin());
     }
 
     //_______________________________________________ Inner Classes

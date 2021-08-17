@@ -91,6 +91,7 @@ class TournamentImpl implements Tournament {
 
     @Override
     public void generateTeams() {
+        this.teams.clear();
         List<Team> start = new Generation(this).start();
         this.teams.addAll(start);
     }
