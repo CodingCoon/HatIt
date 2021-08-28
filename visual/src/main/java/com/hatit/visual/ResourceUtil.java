@@ -11,8 +11,11 @@ public class ResourceUtil {
     public static final Image SETTINGS_1 = load("/settings_1.png");
     public static final Image SETTINGS_2 = load("/settings_2.png");
     public static final Image ADD_ITEM = load("/add_item.png");
+    public static final Image STAR = load("/star.png");
+    public static final Image STAR_OUTLINED = load("/star-outline.png");
     public static final Image ADD_PLAYER = load("/account-plus.png");
     public static final Image ADD_CRITERIA = load("/star-plus.png");
+    public static final Image ADD_TAG = load("/tag-plus.png");
     public static final Image SAVE = load("/save.png");
     public static final Image DOWNLOAD = load("/download.png");
     public static final Image UPLOAD = load("/upload.png");

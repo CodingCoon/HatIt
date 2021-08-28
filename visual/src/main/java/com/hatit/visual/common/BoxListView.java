@@ -49,9 +49,6 @@ public class BoxListView<T> extends VBox {
         itemBox.getStyleClass().add(STYLE_CLASS);
         this.addImage = addImage;
 
-        setSpacing(12);
-        itemBox.setSpacing(12); // TODO: funktioniert warum auch immer nicht ohne die zwei Zeilen, Css sollte das abbilden
-
         this.content = content;
         this.newItemSupplier = newItemSupplier;
         this.itemViewCreator = itemViewCreator;

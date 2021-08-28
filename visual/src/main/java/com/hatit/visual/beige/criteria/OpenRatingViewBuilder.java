@@ -17,7 +17,7 @@ class OpenRatingViewBuilder implements CriteriaView.TypeViewBuilder{
 
     //_______________________________________________ Initialize
     OpenRatingViewBuilder(Criteria criteria) {
-        this.setting = (OpenRatingSetting) criteria.propSettings().get();
+        this.setting = (OpenRatingSetting) criteria.propSetting().get();
 
         unitField.setText(setting.getUnit());
         unitField.textProperty().addListener((observable, oldValue, newValue) -> setting.setUnit(newValue));

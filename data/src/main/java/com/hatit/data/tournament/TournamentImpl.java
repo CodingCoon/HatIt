@@ -29,8 +29,13 @@ class TournamentImpl implements Tournament {
 
     //_______________________________________________ Initialize
     TournamentImpl() {
-        this.id = UUID.randomUUID();
-        this.name.setValue("Turnier #" + COUNTER++);
+        this(UUID.randomUUID(), "Turnier #" + COUNTER++, TournamentState.TOURNAMENT);
+    }
+
+    public TournamentImpl(UUID id, String name, TournamentState state) {
+        this.id = id;
+        this.name.setValue(name);
+        this.state.set(state);
         this.preferences = Preferences.of(this);
     }
 
@@ -43,6 +48,11 @@ class TournamentImpl implements Tournament {
     @Override
     public UUID getId() {
         return id;
+    }
+
+    @Override
+    public String getName() {
+        return name.get();
     }
 
     @Override

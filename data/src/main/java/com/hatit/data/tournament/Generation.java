@@ -59,7 +59,7 @@ class Generation {
                     taggingCriteria.add(criteria);
                 }
                 else if (criteriaType == CriteriaType.CONSTRAINED_RATING) {
-                    ConstrainedRatingSetting setting = (ConstrainedRatingSetting) criteria.propSettings().get();
+                    ConstrainedRatingSetting setting = (ConstrainedRatingSetting) criteria.propSetting().get();
                     ConstrainedRatingSetting.Range range = setting.getRange();
                     valueRanges.put(criteria, new ValueRange(range.getMin(), range.getMax(), criteriaUsage.propFactor().getValue()));
                 }
@@ -105,7 +105,7 @@ class Generation {
         }
 
         Criteria criteria = taggingCriteria.get(currentLevel);
-        List<String> tags = ((TaggingSetting) criteria.propSettings().get()).propOptions().stream().map(TaggingSetting.Option::getOption).collect(Collectors.toList());
+        List<String> tags = ((TaggingSetting) criteria.propSetting().get()).propOptions().stream().map(TaggingSetting.Option::getOption).collect(Collectors.toList());
         for (String tag : tags) {
             List<String> newTagBranch = new ArrayList<>(collectedTags);
             newTagBranch.add(tag);

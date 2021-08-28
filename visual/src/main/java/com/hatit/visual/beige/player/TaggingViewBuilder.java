@@ -30,7 +30,7 @@ class TaggingViewBuilder extends CriteriaViewBuilder<TaggingSetting> {
 
     //_______________________________________________ Initialize
     TaggingViewBuilder(Criteria criteria) {
-        super(criteria, (TaggingSetting) criteria.propSettings().get());
+        super(criteria, (TaggingSetting) criteria.propSetting().get());
         this.group = new ToggleGroup();
 
         label = StyleUtil.createLabel(getCriteria().getName());

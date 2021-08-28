@@ -14,12 +14,20 @@ import java.util.UUID;
 public interface Tournament {
     //_______________________________________________ Parameters
     //_______________________________________________ Initialize
+    static Tournament of(UUID id,
+                         String name,
+                         TournamentState state) {
+        return new TournamentImpl(id, name, state);
+    }
+
     static Tournament of() {
         return new TournamentImpl();
     }
 
     //_______________________________________________ Methods
     UUID getId();
+
+    String getName();
 
     StringProperty propName();
 

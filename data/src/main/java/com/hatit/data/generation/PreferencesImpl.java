@@ -20,8 +20,6 @@ class PreferencesImpl implements Preferences {
         tournament.propCriteria().addListener(this::updateUsages);
     }
 
-
-
     //_______________________________________________ Methods
     public IntegerProperty propTeamCount() {
         return teamCount;
@@ -45,7 +43,6 @@ class PreferencesImpl implements Preferences {
                 }
             }
         }
-
     }
 
     //_______________________________________________ Inner Classes

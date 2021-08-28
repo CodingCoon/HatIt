@@ -16,9 +16,7 @@ public interface IOService {
     }
 
     //_______________________________________________ Methods
-    List<String> loadTournamentNames();
-
-    Tournament loadTournament(String fileName);
+    List<Tournament> loadTournaments();
 
     void store(Tournament tournament);
 

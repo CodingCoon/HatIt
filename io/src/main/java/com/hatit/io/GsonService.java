@@ -1,28 +1,53 @@
 package com.hatit.io;
 
-import com.google.gson.*;
-import com.hatit.data.criteria.Criteria;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.stream.JsonReader;
 import com.hatit.data.tournament.Tournament;
 
+import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
-@SuppressWarnings("unchecked")
-public class GsonService implements IOService {        // TODO:    other JSON library
+public class GsonService implements IOService {
 
     //_______________________________________________ Parameters
-
     //_______________________________________________ Initialize
     //_______________________________________________ Methods
     @Override
-    public List<String> loadTournamentNames() {
-        return null;
+    public List<Tournament> loadTournaments() {
+        String dataFolder = System.getenv("LOCALAPPDATA") + "/"  + FILE_RESOURCE;
+        File dataFile = new File(dataFolder);
+        ArrayList<Tournament> tournaments = new ArrayList<>();
+        File[] tournamentFiles = dataFile.listFiles();
+
+        if (tournamentFiles != null) {
+            for (File file : tournamentFiles) {
+                Tournament tournament = loadTournament(file.getAbsolutePath());
+                tournaments.add(tournament);
+            }
+        }
+        return tournaments;
     }
 
-    @Override
-    public Tournament loadTournament(String fileName) {
+    private Tournament loadTournament(String fileName) {
+        Gson gson = new GsonBuilder()
+                .registerTypeHierarchyAdapter(Tournament.class, new TournamentDeserializer())
+                .registerTypeAdapter(Tournament.class, new TournamentDeserializer())
+                .setPrettyPrinting()
+                .enableComplexMapKeySerialization()
+                .create();
+
+        try (FileReader fileReader = new FileReader(fileName)) {
+            JsonReader reader = new JsonReader(fileReader);
+            return gson.fromJson(reader, Tournament.class);
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 
@@ -35,80 +60,14 @@ public class GsonService implements IOService {        // TODO:    other JSON li
                 .enableComplexMapKeySerialization()
                 .create();
 
-        try (FileWriter writer = new FileWriter(FILE_RESOURCE + tournament.propName().get() + EXTENSION)){
+        String fileName = FILE_RESOURCE + tournament.getName() + EXTENSION;
+        try (FileWriter writer = new FileWriter(fileName)){
             gson.toJson(tournament, writer);
         }
         catch (IOException e) {
             e.printStackTrace();
-
         }
     }
-
-    private final class TournamentSerializer implements JsonSerializer<Tournament> {
-        @Override
-        public JsonElement serialize(Tournament src, Type typeOfSrc, JsonSerializationContext context) {
-            JsonObject tournamentJson = new JsonObject();
-            tournamentJson.addProperty("id", src.getId().toString());
-            tournamentJson.addProperty("name", src.propName().get());
-            tournamentJson.addProperty("state", src.getState().get().name());
-
-            JsonArray criteriaArray = src.propCriteria().stream().map(this::createCriteriaJson).collect(JsonArray::new, JsonArray::add, (jsonElements, jsonElements2) -> {});
-            tournamentJson.add("criteria", criteriaArray);
-
-            return tournamentJson;
-        }
-
-        private JsonElement createCriteriaJson(Criteria criteria) {
-            JsonObject criteriaJson = new JsonObject();
-
-            criteriaJson.addProperty("id", criteria.getID().toString());
-            criteriaJson.addProperty("name", criteria.propName().get());
-            criteriaJson.addProperty("type", criteria.propType().get().name());
-
-            return criteriaJson;
-        }
-    }
-
-//    public static void store(Tournament tournament) {
-//        JSONObject root = new JSONObject();
-//
-//        root.put("id", tournament.getId());
-//        root.put("name", tournament.propName().get());
-//
-//        root.put("criteria", createCriteriaJSON(tournament));
-//        root.put("player", createPlayerJSON(tournament.propPlayers()));
-//        root.put("preferences", createPreferencesJSON(tournament));
-//
-//        try (FileWriter writer = new FileWriter(FILE_RESOURCE + tournament.propName().get() + ".json")) {
-//            writer.write(root.toJSONString());
-//            writer.flush();
-//        }
-//        catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//
-//    }
-//
-//    private static Object createPreferencesJSON(Tournament tournament) {
-//        return null;
-//    }
-//
-//    private static Object createPlayerJSON(List<Player> players) {
-//        JSONObject playerObject = new JSONObject();
-//
-//        for (Player player : players) {
-//            playerObject
-//        }
-//        return null;
-//    }
-//
-//    private static Object createCriteriaJSON(Tournament tournament) {
-//        return null;
-//    }
-//
-//    public static List<Tournament> loadTournaments() {
-//        return null;
-//    }
 
     //_______________________________________________ Inner Classes
     //_______________________________________________ End

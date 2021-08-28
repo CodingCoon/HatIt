@@ -20,7 +20,7 @@ class ConstrainedRatingViewBuilder implements TypeViewBuilder {
 
     //_______________________________________________ Initialize
     ConstrainedRatingViewBuilder(Criteria criteria) {
-        this.setting = (ConstrainedRatingSetting) criteria.propSettings().get();
+        this.setting = (ConstrainedRatingSetting) criteria.propSetting().get();
 
         fromField.setText("" + setting.getRange().getMin());
         fromField.textProperty().addListener((observable, oldValue, newValue) -> updateRange());

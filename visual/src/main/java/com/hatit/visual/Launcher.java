@@ -1,9 +1,13 @@
 package com.hatit.visual;
 
+import com.hatit.data.tournament.Tournament;
 import com.hatit.io.Examples;
+import com.hatit.io.IOService;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+
+import java.util.List;
 
 public class Launcher extends Application {
     //_______________________________________________ Parameters
@@ -16,8 +20,6 @@ public class Launcher extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         Enviroment enviroment = new Enviroment();
-        enviroment.addTournament(Examples.createRockNOwl());
-        enviroment.propCurrentTournament().set(null);
 
         HatItView root = new HatItView(enviroment);
         Scene scene = new Scene(root, 1000, 1000);

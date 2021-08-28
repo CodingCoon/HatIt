@@ -11,14 +11,13 @@ class CriteriaImpl implements Criteria {
     private final UUID id;
     private final StringProperty name = new SimpleStringProperty();
     private final ObjectProperty<CriteriaType> type = new SimpleObjectProperty<>();
-    private final ObjectProperty<Setting> settings = new SimpleObjectProperty<>();
+    private final ObjectProperty<Setting> setting = new SimpleObjectProperty<>();
 
     //_______________________________________________ Initialize
-    CriteriaImpl() {
-        this.id = UUID.randomUUID();
+    CriteriaImpl(UUID id) {
+        this.id = id;
         this.name.setValue("Kriterium #" + COUNTER++);
-
-        type.addListener((observable, oldValue, newValue) -> settings.setValue(newValue.createSetting()));
+        this.type.addListener((observable, oldValue, newValue) -> setting.setValue(newValue.createSetting()));
     }
 
     //_______________________________________________ Methods
@@ -38,14 +37,20 @@ class CriteriaImpl implements Criteria {
     }
 
     @Override
-    public <T extends Setting> ReadOnlyObjectProperty<T> propSettings() {
+    public <T extends Setting> ReadOnlyObjectProperty<T> propSetting() {
         //noinspection unchecked
-        return (ReadOnlyObjectProperty<T>) settings;
+        return (ReadOnlyObjectProperty<T>) setting;
+    }
+
+    @Override
+    public <T extends Setting> T getSetting() {
+        //noinspection unchecked
+        return (T) setting.get();
     }
 
     @Override
     public Property<?> getDefaultValueProperty() {
-        return settings.get().getDefaultValue();
+        return setting.get().getDefaultValue();
     }
 
     //_______________________________________________ Inner Classes

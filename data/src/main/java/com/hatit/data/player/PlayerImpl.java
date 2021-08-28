@@ -1,13 +1,13 @@
 package com.hatit.data.player;
 
 import com.hatit.data.criteria.Criteria;
-import javafx.beans.property.*;
+import javafx.beans.property.Property;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableMap;
 
 import java.util.UUID;
-import java.util.function.BiFunction;
-import java.util.function.Function;
 
 class PlayerImpl implements Player {
 
@@ -17,8 +17,8 @@ class PlayerImpl implements Player {
     private final ObservableMap<UUID, Property<?>> stats = FXCollections.observableHashMap();
 
     //_______________________________________________ Initialize
-    PlayerImpl() {
-        this.id = UUID.randomUUID();
+    PlayerImpl(UUID id) {
+        this.id = id;
     }
 
     //_______________________________________________ Methods

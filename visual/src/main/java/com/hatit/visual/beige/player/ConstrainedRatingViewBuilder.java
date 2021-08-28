@@ -4,6 +4,7 @@ import com.hatit.data.criteria.ConstrainedRatingSetting;
 import com.hatit.data.criteria.Criteria;
 import com.hatit.data.player.Player;
 import com.hatit.visual.StyleUtil;
+import com.hatit.visual.common.RatingView;
 import javafx.beans.property.IntegerProperty;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
@@ -12,30 +13,29 @@ import javafx.scene.layout.GridPane;
 class ConstrainedRatingViewBuilder extends PlayerView.CriteriaViewBuilder<ConstrainedRatingSetting> {
     //_______________________________________________ Parameters
     private final Label label;
-    private final Slider slider;
+    private final RatingView ratingView;
     //_______________________________________________ Initialize
 
     ConstrainedRatingViewBuilder(Criteria criteria) {
-        super(criteria, (ConstrainedRatingSetting) criteria.propSettings().get());
+        super(criteria, (ConstrainedRatingSetting) criteria.propSetting().get());
         label = StyleUtil.createLabel(criteria.getName());
 
         ConstrainedRatingSetting.Range range = getSetting().getRange();
-        slider = new Slider(range.getMin(), range.getMax(), range.getMin());
-        slider.setBlockIncrement(1);
+        ratingView = new RatingView(range.getMax());
     }
 
     //_______________________________________________ Methods
     @Override
     void addUI(GridPane gridPane, int row) {
         gridPane.add(label, 0, row);
-        gridPane.add(slider, 1, row);
+        gridPane.add(ratingView, 1, row);
     }
 
     @Override
     void activatePlayer(Player newPlayer) {
         IntegerProperty playerValueProperty = newPlayer.propQualitativStat(getCriteria());
-        slider.valueProperty().setValue(playerValueProperty.get());
-        playerValueProperty.bind(slider.valueProperty().asObject());
+        ratingView.propValue().setValue(playerValueProperty.get());
+        playerValueProperty.bind(ratingView.propValue());
     }
 
     @Override

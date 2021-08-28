@@ -11,7 +11,6 @@ public class Examples {
         return new RockNOwl().getTournament();
     }
 
-
     //_______________________________________________ Inner Classes
     //_______________________________________________ End
 }

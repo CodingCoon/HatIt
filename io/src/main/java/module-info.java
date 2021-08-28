@@ -5,5 +5,6 @@ module hatit.io {
     requires com.google.gson;
 
     exports com.hatit.io;
+    exports com.hatit.io.example;
 
 }

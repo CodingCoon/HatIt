@@ -212,74 +212,16 @@
     -fx-padding: 4 5 4 5;
 }
 
-
-
-/* ========== Tournament ============================== */
-.tournament-box {
-    -fx-background-color: LIGHT;
-    -fx-border-color: DARK;
-    -fx-padding: 8;
-}
-
-.tournament-box:hover {
-    -fx-background-color: derive(LIGHT, -20%);
-}
-
-.tournament-box:pressed {
-    -fx-background-color: derive(LIGHT, -35%);
-}
-
-#tournament-view {
-    -fx-vgap: 8;
-}
-
-/* ========== Criteria ============================== */
-#criteria-overview {
-    -fx-spacing: 24;
-}
-
-#criteria-view {
-    -fx-vgap: 8;
-}
-
-/* ========== Player ============================== */
-#player-overview {
-    -fx-spacing: 16;
-}
-
-#player-view {
-    -fx-vgap: 8
-}
-
-/* ========== Preferences ============================== */
-#preferences-overview {
-    -fx-spacing: 20
-}
-
-#preferences-overview > GridPane{
-    -fx-hgap: 0;
-    -fx-vgap: 8;
-}
-
-/* ========== Team ============================== */
-#team-overview {
-    -fx-hgap: 12;
-    -fx-vgap: 12;
-}
-
-.team-view {
-    -fx-padding: 12;
-    -fx-hgap: 8;
-    -fx-vgap: 8;
-    -fx-border-color: ROSE;
-    -fx-border-stroke: solid;
-    -fx-border-width: 2;
+/* ============ RATING VIEW ============================== */
+.rating-view {
+    -fx-spacing: 4;
+    -fx-padding: 0 2 0 2;
 }
 
 
 /* ========== BOX LIST VIEW ============================== */
 .box-list-view {
-    fx-spacing: 12;
+    -fx-spacing: 12;
 }
 
 .scroll-pane > .viewport {
@@ -324,3 +266,113 @@
 .add-button:armed {
     -fx-background-color: RED, derive(ROSE, 30%);
 }
+
+/* ========== Tournament ============================== */
+.tournament-box {
+    -fx-background-color: LIGHT;
+    -fx-border-color: DARK;
+    -fx-padding: 8;
+}
+
+.tournament-box:hover {
+    -fx-background-color: derive(LIGHT, -20%);
+}
+
+.tournament-box:pressed {
+    -fx-background-color: derive(LIGHT, -35%);
+}
+
+#tournament-view {
+    -fx-vgap: 8;
+}
+
+/* ========== Criteria ============================== */
+#criteria-overview {
+    -fx-spacing: 24;
+}
+
+#criteria-view {
+    -fx-vgap: 8;
+}
+
+#option-list {
+    -fx-spacing: 0;
+}
+
+#option-list > .box-list-view {
+    -fx-spacing: 0;
+}
+
+#option-list > .add-button {
+    -fx-background-color: BLUE, QUEEN_BLUE;
+    -fx-background-insets: 0, 1;
+    -fx-background-radius: 0;
+    -fx-padding: -1 0 0 0;
+}
+
+.add-button:hover {
+    -fx-background-color: BLUE, derive(QUEEN_BLUE, 15%);
+}
+
+.add-button:armed {
+    -fx-background-color: BLUE, derive(QUEEN_BLUE, 30%);
+}
+
+
+/*
+#criteria-view > .box-list-view > .item-view {
+    -fx-background-color: LIGHT;
+    -fx-border-color: BLUE;
+    -fx-padding: 8;
+}
+
+.item-view:hover {
+    -fx-background-color: QUEEN_BLUE;
+}
+
+.item-view:pressed {
+    -fx-background-color: BLUE;
+}
+
+.item-view:selected {
+    -fx-background-color: ROSE;
+}
+
+
+*/
+
+/* ========== Player ============================== */
+#player-overview {
+    -fx-spacing: 16;
+}
+
+#player-view {
+    -fx-vgap: 8
+}
+
+/* ========== Preferences ============================== */
+#preferences-overview {
+    -fx-spacing: 20
+}
+
+#preferences-overview > GridPane{
+    -fx-hgap: 0;
+    -fx-vgap: 8;
+}
+
+/* ========== Team ============================== */
+#team-overview {
+    -fx-hgap: 12;
+    -fx-vgap: 12;
+}
+
+.team-view {
+    -fx-padding: 12;
+    -fx-hgap: 8;
+    -fx-vgap: 8;
+    -fx-border-color: ROSE;
+    -fx-border-stroke: solid;
+    -fx-border-width: 2;
+}
+
+

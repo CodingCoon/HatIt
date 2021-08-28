@@ -12,7 +12,11 @@ public interface Criteria {
     //_______________________________________________ Parameters
     //_______________________________________________ Initialize
     static Criteria of() {
-        return new CriteriaImpl();
+        return new CriteriaImpl(UUID.randomUUID());
+    }
+
+    static Criteria of(UUID id) {
+        return new CriteriaImpl(id);
     }
 
     //_______________________________________________ Methods
@@ -30,7 +34,9 @@ public interface Criteria {
         return propType().get();
     }
 
-    <T extends Setting> ReadOnlyObjectProperty<T> propSettings();
+    <T extends Setting> ReadOnlyObjectProperty<T> propSetting();
+
+    <T extends Setting> T getSetting();
 
     Property<?> getDefaultValueProperty();
 

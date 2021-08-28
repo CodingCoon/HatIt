@@ -18,7 +18,7 @@ public class OpenRatingViewBuilder extends PlayerView.CriteriaViewBuilder<OpenRa
 
     //_______________________________________________ Initialize
     protected OpenRatingViewBuilder(Criteria criteria) {
-        super(criteria,  (OpenRatingSetting) criteria.propSettings().get());
+        super(criteria,  (OpenRatingSetting) criteria.propSetting().get());
         label = StyleUtil.createLabel(criteria.getName());
         unitLabel = StyleUtil.createLabel(getSetting().getUnit());
     }

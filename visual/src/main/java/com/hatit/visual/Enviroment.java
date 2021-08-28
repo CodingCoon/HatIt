@@ -1,10 +1,13 @@
 package com.hatit.visual;
 
 import com.hatit.data.tournament.Tournament;
+import com.hatit.io.IOService;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
+import java.util.List;
 
 public class Enviroment {
     //_______________________________________________ Parameters
@@ -35,11 +38,8 @@ public class Enviroment {
     }
 
     private void loadTournaments() {
-        // TODO:
-    }
-
-    private void save() {
-        // TODO:
+        List<Tournament> tournaments = IOService.createService().loadTournaments();
+        allTournaments.addAll(tournaments);
     }
 
     //_______________________________________________ Inner Classes

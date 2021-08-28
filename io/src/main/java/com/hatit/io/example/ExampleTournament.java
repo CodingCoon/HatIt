@@ -45,7 +45,7 @@ class ExampleTournament {
         Criteria criteria = Criteria.of();
         criteria.propName().setValue(name);
         criteria.propType().set(CriteriaType.TAGGING);
-        TaggingSetting setting = (TaggingSetting) criteria.propSettings().get();
+        TaggingSetting setting = (TaggingSetting) criteria.propSetting().get();
         for (String option : options) {
             setting.propOptions().add(new TaggingSetting.Option(option));
         }
@@ -56,7 +56,7 @@ class ExampleTournament {
         Criteria criteria = Criteria.of();
         criteria.propName().set(name);
         criteria.propType().set(CriteriaType.OPEN_RATING);
-        OpenRatingSetting setting = (OpenRatingSetting) criteria.propSettings().get();
+        OpenRatingSetting setting = (OpenRatingSetting) criteria.propSetting().get();
         setting.setUnit(unit);
         return criteria;
     }
@@ -65,7 +65,7 @@ class ExampleTournament {
         Criteria criteria = Criteria.of();
         criteria.propName().set(name);
         criteria.propType().set(CriteriaType.CONSTRAINED_RATING);
-        ConstrainedRatingSetting setting = (ConstrainedRatingSetting) criteria.propSettings().get();
+        ConstrainedRatingSetting setting = (ConstrainedRatingSetting) criteria.propSetting().get();
         setting.setRange(range);
         return criteria;
     }

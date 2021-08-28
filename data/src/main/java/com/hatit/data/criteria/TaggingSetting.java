@@ -17,14 +17,18 @@ public interface TaggingSetting extends Setting {
 
     //_______________________________________________ Inner Classes
     class Option {
-        private final String option;
+        private final StringProperty option = new SimpleStringProperty("");
 
         public Option(String option) {
-            this.option = option;
+            this.option.set(option);
+        }
+
+        public StringProperty propOption() {
+            return option;
         }
 
         public String getOption() {
-            return option;
+            return option.get();
         }
     }
 

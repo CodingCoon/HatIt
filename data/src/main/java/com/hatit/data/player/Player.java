@@ -10,7 +10,11 @@ public interface Player {
     //_______________________________________________ Parameters
     //_______________________________________________ Initialize
     static Player of() {
-        return new PlayerImpl();
+        return new PlayerImpl(UUID.randomUUID());
+    }
+
+    static Player of(UUID id) {
+        return new PlayerImpl(id);
     }
 
     //_______________________________________________ Methods

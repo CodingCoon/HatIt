@@ -3,6 +3,7 @@ package com.hatit.io.example;
 import com.hatit.data.criteria.Criteria;
 import com.hatit.data.criteria.ConstrainedRatingSetting;
 import com.hatit.data.criteria.TaggingSetting;
+import com.hatit.data.generation.Preferences;
 import com.hatit.data.player.Player;
 
 public class RockNOwl extends ExampleTournament {
@@ -31,6 +32,14 @@ public class RockNOwl extends ExampleTournament {
 //        tournament.nextState();
 
         tournament.getPreferences().propTeamCount().setValue(8);
+        for (Preferences.CriteriaUsage usage : tournament.getPreferences().getUsages()) {
+            if (usage.getCriteria() == stamina) {
+                usage.propActive().set(false);
+            }
+            if (usage.getCriteria() == throwingSkill) {
+                usage.propFactor().setValue(1.5);
+            }
+        }
     }
 
     //_______________________________________________ Methods
@@ -40,7 +49,7 @@ public class RockNOwl extends ExampleTournament {
     Player createPlayer(int i) {
         Player player = super.createPlayer(i);
 
-        TaggingSetting sexSetting = (TaggingSetting) sex.propSettings().get();
+        TaggingSetting sexSetting = (TaggingSetting) sex.propSetting().get();
         player.propTaggingStat(sex).setValue(sexSetting.propOptions().get(randomInt(2)).getOption());
 
         player.propQualitativStat(size).setValue(randomInt(120, 221));
