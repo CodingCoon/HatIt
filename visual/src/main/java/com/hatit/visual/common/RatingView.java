@@ -4,17 +4,13 @@ import com.hatit.visual.ResourceUtil;
 import com.hatit.visual.StyleUtil;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.css.PseudoClass;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 
 public class RatingView extends HBox {
     //_______________________________________________ Parameters
-    private static final PseudoClass SELECTED_STATE = PseudoClass.getPseudoClass("selected");
     private static final String STYLE_CLASS = "rating-view";
 
     private final IntegerProperty value = new SimpleIntegerProperty();
@@ -35,7 +31,11 @@ public class RatingView extends HBox {
             int viewValue = i;
 
             ImageView starView = new ImageView(ResourceUtil.STAR);
-            starView.setEffect(StyleUtil.createColorAdjust(StyleUtil.BLUE));
+            disabledProperty().addListener((observable, oldValue, newValue) -> {
+                ColorAdjust colorAdjust = newValue ? StyleUtil.createColorAdjust(StyleUtil.LIGHT.darker())
+                                                   : StyleUtil.createColorAdjust(StyleUtil.BLUE.darker());
+                starView.setEffect(colorAdjust);
+            });
             value.addListener((observable, oldValue, newValue) -> updateImageView(starView, viewValue));
 
             StackPane imagePane = new StackPane(starView);

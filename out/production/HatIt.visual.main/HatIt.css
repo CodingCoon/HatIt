@@ -218,9 +218,12 @@
     -fx-padding: 0 2 0 2;
 }
 
-
 /* ========== BOX LIST VIEW ============================== */
 .box-list-view {
+    -fx-spacing: 12;
+}
+
+.item-box {
     -fx-spacing: 12;
 }
 
@@ -267,6 +270,101 @@
     -fx-background-color: RED, derive(ROSE, 30%);
 }
 
+/* ========== BOX LIST VIEW ============================== */
+.tag-list > .add-button {
+    -fx-background-color: BLUE, QUEEN_BLUE;
+    -fx-background-insets: 0, 1;
+    -fx-background-radius: 0;
+    -fx-padding: 6 0 5 0;
+}
+
+.tag-list > .add-button:hover {
+    -fx-background-color: BLUE, derive(QUEEN_BLUE, 15%);
+}
+
+.tag-list > .add-button:armed {
+    -fx-background-color: BLUE, derive(QUEEN_BLUE, 30%);
+}
+
+.tag-list > .scroll-pane {
+    -fx-background-color: null;
+    -fx-hbar-policy: never;
+    -fx-padding: 0;
+    -fx-fit-to-width: true;     /* todo style bars   no arrows, only a light red bar  */
+}
+
+.tag-box {
+    -fx-spacing: 0;
+}
+
+.tag-view {
+    -fx-background-color: LIGHT;
+    -fx-border-color: DARK;
+    -fx-border-width: 0 1 1 1;
+    -fx-padding: 8;
+}
+
+.tag-view:hover {
+    -fx-background-color: BLUE, derive(QUEEN_BLUE, 15%);
+}
+
+/* todo wildcards in the middle
+   .tab-pane > * > .scroll-pane > .scroll-bar, */
+
+.option-box > .label {
+    -fx-padding: 5 0 5 10;
+    -fx-font-size: 16;
+}
+
+/* ========== Progress View ============================== */
+/* decrement-button — StackPane
+        decrement-arrow — StackPane
+    track — StackPane
+    thumb — StackPane
+    increment-button — StackPane
+        increment-arrow — StackPane
+*/
+
+.scroll-pane > .scroll-bar:vertical > .increment-button > .increment-arrow,
+.scroll-pane > .scroll-bar:vertical > .decrement-button > .decrement-arrow,
+.scroll-pane > .scroll-bar:vertical > .increment-button,
+.scroll-pane > .scroll-bar:vertical > .decrement-button {
+    -fx-padding: 0 3 0 3;
+    -fx-opacity: 0;
+}
+
+.scroll-pane > .scroll-bar:vertical > .track{
+    -fx-background-color: null;
+}
+
+.scroll-pane > .scroll-bar:vertical > .thumb {
+    -fx-background-color: LIGHT_ROSE;
+    -fx-background-radius: 0;
+}
+
+.scroll-pane > .scroll-bar:vertical > .thumb:hover,
+.scroll-pane > .scroll-bar:vertical > .thumb:pressed {
+    -fx-background-color: ROSE;
+}
+
+.scroll-pane > .scroll-bar:vertical {
+    -fx-padding: 0 2 0 2;
+    -fx-background-color: null;
+}
+
+.scroll-pane > .corner {
+    -fx-padding: 0;
+    -fx-background-color: DARK;
+}
+
+
+/* ========== Progress View ============================== */
+.progress-view {
+    -fx-spacing: 4;
+    -fx-fill-width: true;
+}
+
+
 /* ========== Tournament ============================== */
 .tournament-box {
     -fx-background-color: LIGHT;
@@ -294,52 +392,6 @@
 #criteria-view {
     -fx-vgap: 8;
 }
-
-#option-list {
-    -fx-spacing: 0;
-}
-
-#option-list > .box-list-view {
-    -fx-spacing: 0;
-}
-
-#option-list > .add-button {
-    -fx-background-color: BLUE, QUEEN_BLUE;
-    -fx-background-insets: 0, 1;
-    -fx-background-radius: 0;
-    -fx-padding: -1 0 0 0;
-}
-
-.add-button:hover {
-    -fx-background-color: BLUE, derive(QUEEN_BLUE, 15%);
-}
-
-.add-button:armed {
-    -fx-background-color: BLUE, derive(QUEEN_BLUE, 30%);
-}
-
-
-/*
-#criteria-view > .box-list-view > .item-view {
-    -fx-background-color: LIGHT;
-    -fx-border-color: BLUE;
-    -fx-padding: 8;
-}
-
-.item-view:hover {
-    -fx-background-color: QUEEN_BLUE;
-}
-
-.item-view:pressed {
-    -fx-background-color: BLUE;
-}
-
-.item-view:selected {
-    -fx-background-color: ROSE;
-}
-
-
-*/
 
 /* ========== Player ============================== */
 #player-overview {

@@ -2,9 +2,11 @@ package com.hatit.visual;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.CacheHint;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
@@ -13,6 +15,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.scene.text.TextAlignment;
 
 public class StyleUtil {
     //_______________________________________________ Parameters
@@ -86,6 +89,7 @@ public class StyleUtil {
         StackPane imagePane = new StackPane(new ImageView(image));
         button.setGraphic(imagePane);
         button.setText(text);
+        button.setAlignment(Pos.BASELINE_LEFT);
         return button;
     }
 

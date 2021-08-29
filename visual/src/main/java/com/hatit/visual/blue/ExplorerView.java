@@ -35,7 +35,7 @@ public class ExplorerView extends VBox {
     private static final class ImageButton extends StackPane {
         private ImageButton(Enviroment enviroment) {
             getStyleClass().add("add-button");
-            getChildren().add(new ImageView(ResourceUtil.ADD_ITEM));
+            getChildren().add(new ImageView(ResourceUtil.ADD_TOURNAMENT));
             setOnMouseClicked(event -> enviroment.addTournament(Tournament.of()));
         }
     }

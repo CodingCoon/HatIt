@@ -5,7 +5,7 @@
   "criteria": [
     {
       "id": "4a2c0e8c-4658-40d8-9c24-18f2896214d6",
-      "name": "Geschlecht",
+      "name": "Sex",
       "type": "TAGGING",
       "tagging setting": [
         "W",
@@ -1048,11 +1048,6 @@
         "factor": 1.0
       },
       {
-        "criteria": "b473b7aa-2649-4505-8a82-a610f442104c",
-        "active": true,
-        "factor": 1.5
-      },
-      {
         "criteria": "8f519d0f-cb4b-4fdf-9f42-15773652b2ff",
         "active": false,
         "factor": 1.0
@@ -1061,6 +1056,11 @@
         "criteria": "27162a9b-69eb-4e19-9d01-88d44e856b59",
         "active": true,
         "factor": 1.0
+      },
+      {
+        "criteria": "b473b7aa-2649-4505-8a82-a610f442104c",
+        "active": true,
+        "factor": 1.5
       }
     ]
   }

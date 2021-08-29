@@ -31,7 +31,7 @@ public class BeigeView extends VBox {
 
     private static final Map<TournamentState, Function<Tournament, Node>> UI_CREATION = new HashMap<>();
     static {
-        UI_CREATION.put(TournamentState.TOURNAMENT  , TournamentOverview::new); // TODO: all to ...Overview
+        UI_CREATION.put(TournamentState.TOURNAMENT  , TournamentOverview::new);
         UI_CREATION.put(TournamentState.CRITERIA    , CriteriaOverview::new);
         UI_CREATION.put(TournamentState.PLAYER      , PlayerOverview::new);
         UI_CREATION.put(TournamentState.PREFERENCES , PreferencesOverview::new);
@@ -62,6 +62,8 @@ public class BeigeView extends VBox {
 
         getChildren().addAll(contentView, nextButton);
         setVgrow(contentView, Priority.ALWAYS);
+        setMinHeight(100);
+        setPrefHeight(100);
     }
 
     private  void selectionChanged(Tournament oldSelection, Tournament newSelection) {

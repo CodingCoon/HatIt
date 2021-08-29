@@ -1,7 +1,7 @@
 package com.hatit.visual.blue;
 
-import com.hatit.data.tournament.TournamentState;
 import com.hatit.data.tournament.Tournament;
+import com.hatit.data.tournament.TournamentState;
 import com.hatit.io.IOService;
 import com.hatit.visual.Enviroment;
 import com.hatit.visual.ResourceUtil;
@@ -11,17 +11,18 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
 public class ProgressView extends VBox {
     //_______________________________________________ Parameters
+    private static final String STYLE_CLASS = "progress-view";
     private final Enviroment enviroment;
     private final Tournament tournament;
 
     //_______________________________________________ Initialize
     public ProgressView(Enviroment enviroment) {
+        getStyleClass().add(STYLE_CLASS);
         this.enviroment = enviroment;
         this.tournament = enviroment.getCurrentTournament();
 
@@ -34,15 +35,16 @@ public class ProgressView extends VBox {
     //_______________________________________________ Methods
     private void initUI(VBox progressView) {
         Button backButton = StyleUtil.createTextedImageButton(ResourceUtil.PREVIOUS, "Zurück", event -> goBack());
-//        Button saveButton = StyleUtil.createImageButton(ResourceUtil.SAVE, "Speichern", event -> IOService.createService().store(tournament));
+        Button saveButton = StyleUtil.createTextedImageButton(ResourceUtil.SAVE, "Speichern", event -> store());
+        backButton.setMaxWidth(Double.MAX_VALUE); // TODO: not so nice, but extends it without affecting other buttons
 
-        HBox buttons = new HBox(backButton/*, saveButton*/);    // TODO: pixel perfect
-        buttons.setFillHeight(true);
-        buttons.setSpacing(4);
-
-        getChildren().addAll(progressView, buttons);
+        getChildren().addAll(progressView, saveButton, backButton);
         setVgrow(progressView, Priority.ALWAYS);
         setAlignment(Pos.TOP_RIGHT);
+    }
+
+    private void store() {
+        IOService.createService().store(tournament);
     }
 
     private void goBack() {

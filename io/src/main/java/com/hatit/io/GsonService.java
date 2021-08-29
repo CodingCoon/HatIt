@@ -19,8 +19,7 @@ public class GsonService implements IOService {
     //_______________________________________________ Methods
     @Override
     public List<Tournament> loadTournaments() {
-        String dataFolder = System.getenv("LOCALAPPDATA") + "/"  + FILE_RESOURCE;
-        File dataFile = new File(dataFolder);
+        File dataFile = new File(getLocalappdata());
         ArrayList<Tournament> tournaments = new ArrayList<>();
         File[] tournamentFiles = dataFile.listFiles();
 
@@ -31,6 +30,10 @@ public class GsonService implements IOService {
             }
         }
         return tournaments;
+    }
+
+    private String getLocalappdata() {
+        return System.getenv("LOCALAPPDATA") + "/" + FILE_RESOURCE ;
     }
 
     private Tournament loadTournament(String fileName) {
@@ -60,7 +63,7 @@ public class GsonService implements IOService {
                 .enableComplexMapKeySerialization()
                 .create();
 
-        String fileName = FILE_RESOURCE + tournament.getName() + EXTENSION;
+        String fileName = getLocalappdata() + tournament.getName() + EXTENSION;
         try (FileWriter writer = new FileWriter(fileName)){
             gson.toJson(tournament, writer);
         }
