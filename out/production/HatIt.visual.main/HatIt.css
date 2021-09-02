@@ -1,11 +1,13 @@
 
 .root {
     LIGHT: #E1DBD5FF;
+    LIGHT_2: #E1DBD5AA;
     LIGHT_ROSE: #D8A6A6FF;
     ROSE: #D07077FF;
     RED: #7A2A2DFF;
     BLUE: #22323FFF;
     QUEEN_BLUE: #4F7492FF;
+    QUEEN_BLUE_2: #4F7492AA;
     DARK: #000C14FF;
 }
 
@@ -111,27 +113,60 @@
 
 
 /* ==== CHECK BOX =====================================*/
+
 .check-box {
-    -fx-background-color: QUEEN_BLUE;
-    -fx-background-insets: 0;
-    -fx-background-radius: 0;
-    -fx-padding: 1;
+    -fx-background-color: #FF0000FF;
+    -fx-padding: 0;
 }
 
 .check-box > .box {
-    -fx-background-color: LIGHT;
-    -fx-padding: 11;
+    -fx-background-color: #00FF00FF;
+    -fx-padding: 0.166667em 0.166667em 0.25em 0.25em; /* 2 2 3 3 */
+}
+
+.check-box > .box > .mark {
+    -fx-background-color: #0000FFFF;
+    -fx-padding: 1.0em 1.0em 1.083333em 1.0em;
+    /*-fx-shape: "M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z";*/
+    -fx-shape: "M-0.25,6.083c0.843-0.758,4.583,4.833,5.75,4.833S14.5-1.5,15.917-0.917c1.292,0.532-8.75,17.083-10.5,17.083C3,16.167-1.083,6.833-0.25,6.083z";
+}
+
+
+
+
+/*.check-box {
+    -fx-border-color: null;
+    -fx-border-width: 0;
+    -fx-background-color: null;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+    -fx-padding: 0;
+}
+
+.check-box {
+
+}
+
+.check-box > .box {
+    -fx-border-color: QUEEN_BLUE;
+    -fx-border-width: 1;
+    -fx-background-color: LIGHT_2;
+    -fx-padding: 11 9 9 11;
     -fx-background-radius: 0;
 }
 
+.check-box:hover > .box {
+    -fx-background-color: derive(QUEEN_BLUE_2, 30%);
+}
+
 .check-box:selected > .box {
-    -fx-background-color: QUEEN_BLUE;
+    -fx-background-color: QUEEN_BLUE_2;
 }
 
 .check-box:selected > .box > .mark {
-    -fx-shape: "M 22.566406 4.730469 L 20.773438 3.511719 C 20.277344 3.175781 19.597656 3.304688 19.265625 3.796875 L 10.476563 16.757813 L 6.4375 12.71875 C 6.015625 12.296875 5.328125 12.296875 4.90625 12.71875 L 3.371094 14.253906 C 2.949219 14.675781 2.949219 15.363281 3.371094 15.789063 L 9.582031 22 C 9.929688 22.347656 10.476563 22.613281 10.96875 22.613281 C 11.460938 22.613281 11.957031 22.304688 12.277344 21.839844 L 22.855469 6.234375 C 23.191406 5.742188 23.0625 5.066406 22.566406 4.730469 Z";
+    -fx-shape: "M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z";
     -fx-background-color: LIGHT;
-}
+}*/
 
 
 /* ==== SLIDER =====================================*/

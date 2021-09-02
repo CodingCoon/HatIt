@@ -14,4 +14,6 @@ module visual {
     exports com.hatit.visual.beige.player to javafx.graphics;
     exports com.hatit.visual.black to javafx.graphics;
     exports com.hatit.visual.beige.tournament to javafx.graphics;
+
+    exports com.hatit.visual.common;
 }

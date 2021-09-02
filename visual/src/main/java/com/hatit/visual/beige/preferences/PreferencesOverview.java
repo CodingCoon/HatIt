@@ -7,16 +7,18 @@ import com.hatit.data.tournament.Tournament;
 import com.hatit.visual.ScenePartChangeListener;
 import com.hatit.visual.StyleUtil;
 import com.hatit.visual.binding.StringToIntBinding;
+import com.hatit.visual.common.MyCheckBox;
+import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.beans.binding.IntegerBinding;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
+import javafx.css.PseudoClass;
 import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,15 +50,39 @@ public class PreferencesOverview extends VBox {
         Preferences preferences = tournament.getPreferences();
         teamCountField.setText("" + preferences.propTeamCount().get());
         preferences.propTeamCount().bind(new StringToIntBinding(2, teamCountField.textProperty()));
+        Platform.runLater(() -> {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    Platform.runLater(() -> {
+//                        preferencesGrid.getChildren().stream().filter(n -> n instanceof CheckBox).map(n -> (Region) n).forEach(n -> n.setBorder(new Border(new BorderStroke(Color.RED, BorderStrokeStyle.SOLID, null, BorderStroke.DEFAULT_WIDTHS))));
+//
+//             activeCheckBox.setBorder(new Border(new BorderStroke(StyleUtil.QUEEN_BLUE, BorderStrokeStyle.SOLID, null, BorderStroke.DEFAULT_WIDTHS)));
+
+                    });
+                }
+            }).start();
+        });
+//            Platform.runLater(() -> {
+//            preferencesGrid.getChildren().stream().filter(n -> n instanceof Region).map(n -> (Region) n).forEach(n -> n.setBorder(null));
+//            });
+//
+//        });
     }
 
     private void onHide() {
         toRemoveListeners.forEach(Runnable::run);
         tournament.getPreferences().propTeamCount().unbind();
+
     }
 
+    GridPane preferencesGrid = new GridPane();
     private void addPreferencesGrid() {
-        GridPane preferencesGrid = new GridPane();
         int row = 0;
 
         Preferences preferences = tournament.getPreferences();
@@ -67,22 +93,28 @@ public class PreferencesOverview extends VBox {
         getChildren().add(preferencesGrid);
     }
 
+
     private void addUsageRow(GridPane preferencesGrid, int row, CriteriaUsage usage) {
-        CheckBox activeCheckBox = createActiveCheckBox(usage);
+        MyCheckBox activeCheckBox = createActiveCheckBox(usage);
         Label nameLabel = StyleUtil.createLabel(usage.getCriteriaName());
         Node factorField = createFactorField(usage);
-
-        activeCheckBox.selectedProperty().addListener((observable, oldValue, newValue) -> {
-            nameLabel.setDisable(! newValue);
-            factorField.setDisable(! newValue);
-            if (factorField instanceof ComboBox) { // TODO:
-                factorField.setDisable(true);
-            }
-        });
 
         preferencesGrid.add(activeCheckBox, 0, row);
         preferencesGrid.add(nameLabel, 1, row);
         preferencesGrid.add(factorField, 2, row);
+
+        activeCheckBox.propSelected().addListener((observable, oldValue, isUsable) -> {
+            updateNodeUsability(nameLabel, factorField, isUsable);
+        });
+        updateNodeUsability(nameLabel, factorField, activeCheckBox.isSelected());
+    }
+
+    private void updateNodeUsability(Label nameLabel, Node factorField, boolean rowIsActive) {
+        nameLabel.setDisable(!rowIsActive);
+        factorField.setDisable(!rowIsActive);
+        if (factorField instanceof ComboBox) { // TODO:
+            factorField.setDisable(true);
+        }
     }
 
     private Node createFactorField(CriteriaUsage usage) {
@@ -102,11 +134,11 @@ public class PreferencesOverview extends VBox {
         }
     }
 
-    private CheckBox createActiveCheckBox(CriteriaUsage usages) {
-        CheckBox activeBox = new CheckBox();
-        activeBox.selectedProperty().set(usages.propActive().getValue());
-        usages.propActive().bind(activeBox.selectedProperty());
-        toRemoveListeners.add(() -> usages.propActive().unbind());
+    private MyCheckBox createActiveCheckBox(CriteriaUsage usage) {
+        MyCheckBox activeBox = new MyCheckBox();
+        activeBox.propSelected().set(usage.propActive().getValue());
+        usage.propActive().bind(activeBox.propSelected());
+        toRemoveListeners.add(() -> usage.propActive().unbind());
         return activeBox;
     }
 
