@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Main-Class: com.hatit.visual.Launcher
+Implementation-Title: HatIt
+Implementation-Version: 1.0.0
+

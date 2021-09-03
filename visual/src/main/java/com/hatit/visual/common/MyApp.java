@@ -2,7 +2,6 @@ package com.hatit.visual.common;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.CheckBox;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 

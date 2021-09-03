@@ -1,5 +1,6 @@
 module hatit.data {
     requires javafx.base;
+    requires org.joda.time;
 
     exports com.hatit.data.criteria;
     exports com.hatit.data.generation;

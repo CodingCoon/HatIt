@@ -7,6 +7,7 @@ import java.util.List;
 public interface IOService {
 
     //_______________________________________________ Parameters
+    String VERSION = "1.0.0";
     String FILE_RESOURCE = "hatit/";
     String EXTENSION = ".json";
 

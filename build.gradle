@@ -9,19 +9,20 @@ plugins {
 apply plugin: 'idea'
 
 group 'com.hatit'
-version '1.0-SNAPSHOT'
+version '1.0.0'
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    compile 'org.codehaus.groovy:groovy-all:2.3.11'
+    compile 'org.codehaus.groovy:groovy-all:3.0.8'
     // testCompile group: 'junit', name: 'junit', version: '4.12'
     // testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
     // testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
 //    compile group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
-    implementation 'com.google.code.gson:gson:2.8.7'
+    implementation 'com.google.code.gson:gson:2.8.8'
+    implementation 'joda-time:joda-time:2.10.10'
 }
 
 configurations {
@@ -36,9 +37,22 @@ javafx {
     modules = [ 'javafx.controls' ]
 }
 
+sourceSets {
+    main {
+        java {
+            srcDirs= ["src/main/java"]
+        }
+        resources {
+            srcDirs= ["src/main/resources"]
+        }
+    }
+}
 
-idea {
-    module {
-        inheritOutputDirs = true
+jar {
+    manifest {
+        attributes "Main-Class": "com.hatit.visual.Launcher"
+    }
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
     }
 }

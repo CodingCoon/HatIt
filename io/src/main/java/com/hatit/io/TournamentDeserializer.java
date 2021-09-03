@@ -6,6 +6,7 @@ import com.hatit.data.generation.Preferences;
 import com.hatit.data.player.Player;
 import com.hatit.data.tournament.Tournament;
 import com.hatit.data.tournament.TournamentState;
+import org.joda.time.DateTime;
 
 import java.lang.reflect.Type;
 import java.util.UUID;
@@ -19,9 +20,15 @@ public class TournamentDeserializer implements JsonDeserializer<Tournament> {
     public Tournament deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
         JsonObject tournamentJson = json.getAsJsonObject();
 
-        String id    = tournamentJson.get("id").getAsString();
-        String name  = tournamentJson.get("name").getAsString();
-        String state = tournamentJson.get("state").getAsString();
+        String id      = tournamentJson.get("id").getAsString();
+        String name    = tournamentJson.get("name").getAsString();
+        String state   = tournamentJson.get("state").getAsString();
+
+        if (tournamentJson.has("version")) {
+            String version = tournamentJson.get("version").getAsString();
+            DateTime lastChange = DateTime.parse(tournamentJson.get("last change").getAsString());
+        }
+
         Tournament tournament = Tournament.of(UUID.fromString(id), name, TournamentState.valueOf(state));
 
         loadCriteria(tournament, tournamentJson);

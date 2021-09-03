@@ -1,13 +1,8 @@
 package com.hatit.visual;
 
-import com.hatit.data.tournament.Tournament;
-import com.hatit.io.Examples;
-import com.hatit.io.IOService;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
-import java.util.List;
 
 public class Launcher extends Application {
     //_______________________________________________ Parameters

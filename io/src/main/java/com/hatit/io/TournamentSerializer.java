@@ -5,6 +5,7 @@ import com.hatit.data.criteria.*;
 import com.hatit.data.generation.Preferences;
 import com.hatit.data.player.Player;
 import com.hatit.data.tournament.Tournament;
+import org.joda.time.DateTime;
 
 import java.lang.reflect.Type;
 import java.util.List;
@@ -19,6 +20,8 @@ class TournamentSerializer implements JsonSerializer<Tournament> {
         tournamentJson.addProperty("id", src.getId().toString());
         tournamentJson.addProperty("name", src.propName().get());
         tournamentJson.addProperty("state", src.getState().get().name());
+        tournamentJson.addProperty("version", IOService.VERSION);
+        tournamentJson.addProperty("last change", DateTime.now().toString());
 
         JsonArray criteriaArray = src.propCriteria().stream().map(this::createCriteriaJson).collect(JsonArray::new, JsonArray::add, (jsonElements, jsonElements2) -> {});
         tournamentJson.add("criteria", criteriaArray);

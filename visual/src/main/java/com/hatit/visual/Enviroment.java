@@ -2,7 +2,9 @@ package com.hatit.visual;
 
 import com.hatit.data.tournament.Tournament;
 import com.hatit.io.IOService;
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,6 +15,8 @@ public class Enviroment {
     //_______________________________________________ Parameters
     private final ObservableList<Tournament> allTournaments = FXCollections.observableArrayList();
     private final ObjectProperty<Tournament> currentTournament = new SimpleObjectProperty<>();
+
+    private final BooleanProperty hasChanges = new SimpleBooleanProperty(false);
 
     //_______________________________________________ Initialize
     public Enviroment() {
