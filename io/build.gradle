@@ -1,10 +1,7 @@
 plugins {
     id 'java'
-    id 'org.openjfx.javafxplugin'
+    id 'org.openjfx.javafxplugin' version '0.0.10'
 }
-
-group 'com.hatit'
-version '0.1'
 
 repositories {
     mavenCentral()
@@ -15,7 +12,15 @@ javafx {
 }
 
 dependencies {
-    implementation 'com.google.code.gson:gson:2.8.7'
+    implementation 'com.google.code.gson:gson:2.8.8'
     implementation 'joda-time:joda-time:2.10.10'
+
     implementation project(':data')
+}
+
+java {
+    modularity.inferModulePath = true
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(16))
+    }
 }

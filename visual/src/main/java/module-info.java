@@ -15,4 +15,7 @@ module visual {
     exports com.hatit.visual.beige.player to javafx.graphics;
 
     exports com.hatit.visual.common;
+
+    opens com.hatit.visual to javafx.graphics;
+
 }

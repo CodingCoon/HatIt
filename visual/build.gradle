@@ -1,34 +1,71 @@
 plugins {
     id 'java'
-    id 'org.openjfx.javafxplugin'
     id 'idea'
+    id 'application'
+    id 'java-library'
+    id 'org.openjfx.javafxplugin' version '0.0.10'
 }
-
-idea {
-    module {
-        inheritOutputDirs = true
-    }
-}
-
-group 'com.hatit'
-version '0.1'
 
 repositories {
     mavenCentral()
 }
 
-dependencies {
-    compile project(':data')
-    compile project(':io')
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
-}
-
 javafx {
     version = "16"
-    modules = [ 'javafx.controls' ]
+    modules = [ 'javafx.controls', 'javafx.graphics']
 }
 
-test {
-    useJUnitPlatform()
+dependencies {
+    implementation project(':data')
+    implementation project(':io')
 }
+
+java {
+    modularity.inferModulePath = true
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(16))
+    }
+}
+
+//sourceSets {
+//    main {
+//        java {
+//            srcDirs = ['src/main/java']
+//        }
+//        resources {
+//            srcDirs = ['src/main/resources']
+//        }
+//        output.resourcesDir = 'build/classes'
+//    }
+//}
+
+
+//sourceSets {
+//    main {
+//        resources {
+//            srcDirs = ['source/resources']
+//        }
+//    }
+//}
+
+project.afterEvaluate {
+    println "visual source = " + sourceSets.main.resources.source
+}
+
+//final SourceSetOutput output = project.getConvention().findPlugin(JavaPluginConvention).sourceSets.getByName("main").getOutput();
+//print("\nOUTPUT: " + output)
+//final FileCollection classesDirs = output.getClassesDirs()
+//if (classesDirs.size() == 1) {
+//    print("\nCLASSES_DIR: " + classesDirs[0])
+//    output.setResourcesDir(classesDirs[0]);
+//}
+//for (File file : classesDirs) {
+//    print("\nF: " + file)
+//}
+
+application {
+    mainModule.set('com.hatit.visual')
+    mainClass.set('com.hatit.visual.Launcher')
+}
+
+project.configurations.implementation.setCanBeResolved(true)
