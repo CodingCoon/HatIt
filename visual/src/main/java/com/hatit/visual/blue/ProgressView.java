@@ -6,6 +6,7 @@ import com.hatit.io.IOService;
 import com.hatit.visual.Enviroment;
 import com.hatit.visual.ResourceUtil;
 import com.hatit.visual.StyleUtil;
+import com.hatit.visual.common.AnimatedButton;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -35,7 +36,7 @@ public class ProgressView extends VBox {
     //_______________________________________________ Methods
     private void initUI(VBox progressView) {
         Button backButton = StyleUtil.createTextedImageButton(ResourceUtil.PREVIOUS, "Zurück", event -> goBack());
-        Button saveButton = StyleUtil.createTextedImageButton(ResourceUtil.SAVE, "Speichern", event -> store());
+        AnimatedButton saveButton = new AnimatedButton("Speichern", "Gespeichert", ResourceUtil.SAVE, this::store);
         backButton.setMaxWidth(Double.MAX_VALUE); // TODO: not so nice, but extends it without affecting other buttons
 
         getChildren().addAll(progressView, saveButton, backButton);

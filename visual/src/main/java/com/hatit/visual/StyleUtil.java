@@ -11,6 +11,8 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -26,6 +28,9 @@ public class StyleUtil {
     public static final Color QUEEN_BLUE = Color.color(79/256d, 116/255d, 146 /255d);
     public static final Color BLUE = Color.color(34/256d, 50/255d, 63/255d);
     public static final Color BLACK = Color.color(0/256d, 12/255d, 20/255d);
+
+    public static final Background ROSE_BGR = new Background(new BackgroundFill(ROSE, null, null));
+    public static final Background LIGHT_BGR = new Background(new BackgroundFill(LIGHT, null, null));
 
     private static final String IMAGE_BUTTON_STYLE_CLASS = "image-button";
     private static final String TEXTED_IMAGE_BUTTON_STYLE_CLASS = "texted-image-button";

@@ -10,7 +10,7 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.SVGPath;
 
-public class MyCheckBox extends StackPane {
+public class CheckBox extends StackPane {
     //_______________________________________________ Parameters
     private static final double DEFAULT_SIZE = 35;
 
@@ -19,8 +19,7 @@ public class MyCheckBox extends StackPane {
     private final BooleanProperty selected = new SimpleBooleanProperty(true);
 
     //_______________________________________________ Initialize
-    public MyCheckBox() {
-
+    public CheckBox() {
         SVGPath hookPath = new SVGPath();
         hookPath.setContent("M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z");
 

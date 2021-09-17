@@ -7,18 +7,12 @@ import com.hatit.data.tournament.Tournament;
 import com.hatit.visual.ScenePartChangeListener;
 import com.hatit.visual.StyleUtil;
 import com.hatit.visual.binding.StringToIntBinding;
-import com.hatit.visual.common.MyCheckBox;
+import com.hatit.visual.common.CheckBox;
 import javafx.application.Platform;
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
-import javafx.beans.binding.IntegerBinding;
-import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
-import javafx.css.PseudoClass;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -95,7 +89,7 @@ public class PreferencesOverview extends VBox {
 
 
     private void addUsageRow(GridPane preferencesGrid, int row, CriteriaUsage usage) {
-        MyCheckBox activeCheckBox = createActiveCheckBox(usage);
+        CheckBox activeCheckBox = createActiveCheckBox(usage);
         Label nameLabel = StyleUtil.createLabel(usage.getCriteriaName());
         Node factorField = createFactorField(usage);
 
@@ -134,8 +128,8 @@ public class PreferencesOverview extends VBox {
         }
     }
 
-    private MyCheckBox createActiveCheckBox(CriteriaUsage usage) {
-        MyCheckBox activeBox = new MyCheckBox();
+    private CheckBox createActiveCheckBox(CriteriaUsage usage) {
+        CheckBox activeBox = new CheckBox();
         activeBox.propSelected().set(usage.propActive().getValue());
         usage.propActive().bind(activeBox.propSelected());
         toRemoveListeners.add(() -> usage.propActive().unbind());
